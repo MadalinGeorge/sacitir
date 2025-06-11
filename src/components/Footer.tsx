@@ -23,31 +23,55 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+    <footer className="bg-gray-900 text-white pt-16 pb-8">
+      <div className="container">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2">
+          <div>
+            <div className="flex items-center space-x-2 mb-6">
               <div className="bg-blue-600 p-2 rounded-lg">
                 <Truck className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold">SACITIR</span>
             </div>
-            <p className="text-gray-400 leading-relaxed">
-              {t('home.about.description')}
+            <p className="text-gray-400 mb-6">
+              Reliable freight transport solutions for businesses nationwide.
             </p>
+            <div className="space-y-3">
+              <div className="flex items-start space-x-3">
+                <MapPin className="w-5 h-5 text-blue-400 mt-1" />
+                <span className="text-gray-300">
+                  123 Transport Avenue<br />
+                  Logistics District<br />
+                  City, State 12345
+                </span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone className="w-5 h-5 text-blue-400" />
+                <span className="text-gray-300">(123) 456-7890</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Mail className="w-5 h-5 text-blue-400" />
+                <span className="text-gray-300">info@sacitir.com</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Clock className="w-5 h-5 text-blue-400" />
+                <span className="text-gray-300">Mon-Fri: 8AM - 6PM</span>
+              </div>
+            </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+            <h3 className="text-lg font-bold mb-6 border-b border-gray-700 pb-2">
+              Quick Links
+            </h3>
+            <ul className="space-y-3">
               {navLinks.map((link) => (
                 <li key={link.key}>
-                  <Link
+                  <Link 
                     href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors duration-200"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     {t(link.key)}
                   </Link>
@@ -58,13 +82,15 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">{t('nav.services')}</h3>
-            <ul className="space-y-2">
+            <h3 className="text-lg font-bold mb-6 border-b border-gray-700 pb-2">
+              Services
+            </h3>
+            <ul className="space-y-3">
               {services.map((service) => (
                 <li key={service}>
-                  <Link
+                  <Link 
                     href="/services"
-                    className="text-gray-400 hover:text-white transition-colors duration-200"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     {t(service)}
                   </Link>
@@ -73,57 +99,33 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Newsletter */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">{t('contact.title')}</h3>
-            <div className="space-y-3">
-              <div className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                <div className="text-gray-400">
-                  <p>123 Business Avenue</p>
-                  <p>Transport City, TC 12345</p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-blue-400 flex-shrink-0" />
-                <span className="text-gray-400">+1 (555) 123-4567</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-blue-400 flex-shrink-0" />
-                <span className="text-gray-400">info@sacitir.com</span>
-              </div>
-              <div className="flex items-start space-x-3">
-                <Clock className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                <div className="text-gray-400">
-                  <p>Mon - Fri: 8:00 AM - 6:00 PM</p>
-                  <p>Sat: 9:00 AM - 2:00 PM</p>
-                </div>
-              </div>
-            </div>
+            <h3 className="text-lg font-bold mb-6 border-b border-gray-700 pb-2">
+              Newsletter
+            </h3>
+            <p className="text-gray-400 mb-4">
+              Subscribe to our newsletter for the latest updates and offers.
+            </p>
+            <form className="space-y-3">
+              <input
+                type="email"
+                placeholder="Your email address"
+                className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+              />
+              <button
+                type="submit"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition-colors"
+              >
+                Subscribe
+              </button>
+            </form>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-12 pt-8">
-          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-            <p className="text-gray-400 text-sm">
-              © 2024 SACITIR. All rights reserved.
-            </p>
-            <div className="flex space-x-6 text-sm">
-              <Link
-                href="/privacy"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="/terms"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                Terms of Service
-              </Link>
-            </div>
-          </div>
+        {/* Copyright */}
+        <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
+          <p>© {new Date().getFullYear()} SACITIR. All rights reserved.</p>
         </div>
       </div>
     </footer>

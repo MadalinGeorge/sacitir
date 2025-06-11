@@ -3,7 +3,7 @@
 import React from 'react';
 import { Parallax } from 'react-scroll-parallax';
 import { useLocale } from '@/context/LocaleContext';
-import { Truck, Snowflake, Package, CheckCircle, ArrowRight, Clock, Shield, Phone, MapPin } from 'lucide-react';
+import { Truck, Snowflake, Package, CheckCircle, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Services() {
@@ -14,8 +14,8 @@ export default function Services() {
       icon: Truck,
       key: 'national',
       image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80',
-      iconBg: 'bg-blue-100 dark:bg-blue-900',
-      iconColor: 'text-blue-600 dark:text-blue-400',
+      iconBg: 'bg-blue-100',
+      iconColor: 'text-blue-600',
       buttonBg: 'bg-blue-600 hover:bg-blue-700',
       cardAccent: 'bg-blue-600'
     },
@@ -23,8 +23,8 @@ export default function Services() {
       icon: Snowflake,
       key: 'refrigerated',
       image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      iconBg: 'bg-cyan-100 dark:bg-cyan-900',
-      iconColor: 'text-cyan-600 dark:text-cyan-400',
+      iconBg: 'bg-cyan-100',
+      iconColor: 'text-cyan-600',
       buttonBg: 'bg-cyan-600 hover:bg-cyan-700',
       cardAccent: 'bg-cyan-600'
     },
@@ -32,12 +32,26 @@ export default function Services() {
       icon: Package,
       key: 'logistics',
       image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      iconBg: 'bg-green-100 dark:bg-green-900',
-      iconColor: 'text-green-600 dark:text-green-400',
+      iconBg: 'bg-green-100',
+      iconColor: 'text-green-600',
       buttonBg: 'bg-green-600 hover:bg-green-700',
       cardAccent: 'bg-green-600'
     }
   ];
+
+  // Helper function to safely get features array
+  const getFeatures = (key: string): string[] => {
+    try {
+      const features = t(`services.${key}.features`);
+      if (Array.isArray(features)) {
+        return features;
+      }
+      return [];
+    } catch (error) {
+      console.error(`Error getting features for ${key}:`, error);
+      return [];
+    }
+  };
 
   return (
     <div className="min-h-screen pt-16 lg:pt-20">
@@ -66,7 +80,7 @@ export default function Services() {
       </section>
 
       {/* Main Services */}
-      <section className="section bg-white dark:bg-gray-900">
+      <section className="section bg-white">
         <div className="container">
           <div className="space-y-20">
             {services.map((service, index) => (
@@ -76,23 +90,23 @@ export default function Services() {
                     <div className={`${service.iconBg} w-16 h-16 rounded-full flex items-center justify-center`}>
                       <service.icon className={`w-8 h-8 ${service.iconColor}`} />
                     </div>
-                    <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">
+                    <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
                       {t(`services.${service.key}.title`)}
                     </h2>
-                    <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    <p className="text-lg text-gray-600 leading-relaxed">
                       {t(`services.${service.key}.description`)}
                     </p>
                     <div className="space-y-3">
-                      {(t(`services.${service.key}.features`) as string[]).map((feature, idx) => (
+                      {getFeatures(service.key).map((feature, idx) => (
                         <div key={idx} className="flex items-center space-x-3">
                           <CheckCircle className="w-5 h-5 text-blue-600" />
-                          <span className="text-gray-700 dark:text-gray-300">{feature}</span>
+                          <span className="text-gray-700">{feature}</span>
                         </div>
                       ))}
                     </div>
                     <Link
                       href="/contact"
-                      className="btn-primary bg-blue-600 hover:bg-blue-700 inline-flex items-center"
+                      className={`btn-primary ${service.buttonBg} inline-flex items-center`}
                     >
                       {t('services.learnMore')}
                       <ArrowRight className="w-5 h-5 ml-2" />

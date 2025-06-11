@@ -30,6 +30,11 @@ export default function Career() {
     message: ''
   });
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Simulate fetching jobs from Google Sheets API
   useEffect(() => {

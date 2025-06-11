@@ -1,9 +1,11 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Locale } from '@/types';
-import en from '@/locales/en.json';
-import es from '@/locales/es.json';
+import en from '@/locales/en';
+import es from '@/locales/es';
+
+type TranslationType = Record<string, string | Record<string, string>>;
+type Locale = 'en' | 'es';
 
 interface LocaleContextType {
   locale: Locale;
@@ -11,52 +13,49 @@ interface LocaleContextType {
   t: (key: string) => string;
 }
 
-// Default context value for SSR
-const defaultContextValue: LocaleContextType = {
-  locale: 'es',
+const translations: Record<Locale, TranslationType> = { en, es };
+
+const LocaleContext = createContext<LocaleContextType>({
+  locale: 'en',
   setLocale: () => {},
-  t: (key: string) => key, // Return key as fallback during SSR
-};
-
-const LocaleContext = createContext<LocaleContextType>(defaultContextValue);
-
-const translations = {
-  en,
-  es,
-};
-
-function getNestedValue(obj: any, path: string): string {
-  return path.split('.').reduce((current, key) => current?.[key], obj) || path;
-}
+  t: () => '',
+});
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>('es');
+  const [locale, setLocale] = useState<Locale>('en');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    // Get locale from localStorage or browser language, default to Spanish
-    const savedLocale = localStorage.getItem('locale') as Locale;
-    const browserLocale = navigator.language.startsWith('en') ? 'en' : 'es';
-    const initialLocale = savedLocale || browserLocale;
-    
-    // Only update if different from current state to prevent unnecessary re-renders
-    if (initialLocale !== locale) {
-      setLocaleState(initialLocale);
+    const savedLocale = localStorage.getItem('locale') as Locale | null;
+    if (savedLocale && (savedLocale === 'en' || savedLocale === 'es')) {
+      setLocale(savedLocale);
     }
-  }, [locale]);
+  }, []);
 
-  const setLocale = (newLocale: Locale) => {
-    setLocaleState(newLocale);
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('locale', newLocale);
+  useEffect(() => {
+    if (mounted) {
+      localStorage.setItem('locale', locale);
     }
-  };
+  }, [locale, mounted]);
 
+  // Improved translation function that handles nested keys
   const t = (key: string): string => {
-    // Always return from Spanish translations during SSR to ensure consistency
-    const currentLocale = mounted ? locale : 'es';
-    return getNestedValue(translations[currentLocale], key);
+    const keys = key.split('.');
+    let result: any = translations[locale];
+    
+    for (const k of keys) {
+      if (result === undefined) return key;
+      result = result[k];
+    }
+    
+    // If result is an object or undefined, return the key as fallback
+    if (typeof result !== 'string') {
+      console.warn(`Translation key "${key}" returned a non-string value:`, result);
+      return key;
+    }
+    
+    return result;
   };
 
   return (
@@ -67,7 +66,6 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
 }
 
 export function useLocale() {
-  const context = useContext(LocaleContext);
-  return context;
+  return useContext(LocaleContext);
 }
 
