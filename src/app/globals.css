@@ -9,7 +9,6 @@
 * {
   box-sizing: border-box;
   padding: 0;
-  margin: 0;
 }
 
 html,
@@ -95,5 +94,23 @@ a {
 /* Gradient backgrounds */
 .gradient-primary {
   @apply bg-gradient-to-r from-blue-700 to-blue-900;
+}
+
+/* Add this to your globals.css file */
+main {
+  padding-top: 5rem; /* Adjust this value to match your navigation height */
+}
+
+/* Update section styles to remove top padding that might be redundant */
+.section {
+  @apply py-16 md:py-24;
+}
+
+.section-sm {
+  @apply py-12 md:py-16;
+}
+
+.section-lg {
+  @apply py-20 md:py-32;
 }
 

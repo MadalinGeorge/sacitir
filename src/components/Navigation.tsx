@@ -4,12 +4,11 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLocale } from '@/context/LocaleContext';
-import { Menu, X, Globe, Truck } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { locale, setLocale, t } = useLocale();
 
@@ -23,16 +22,6 @@ const Navigation = () => {
 
   useEffect(() => {
     setMounted(true);
-    
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    // Set initial scroll state
-    handleScroll();
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleLanguage = () => {
@@ -41,26 +30,20 @@ const Navigation = () => {
 
   return (
     <nav
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        mounted && isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
-      )}
+      className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg"
       suppressHydrationWarning
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center">
             <Image 
-              src="/images/logo/logo-solo-original.svg" 
+              src="/images/logo/logo-full.jpg" 
               alt="SACITIR Logo" 
-              width={40} 
+              width={160} 
               height={40} 
-              className="w-10 h-10"
+              className="h-10 w-auto"
             />
-            <span className="text-xl font-bold">SACITIR</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -69,10 +52,10 @@ const Navigation = () => {
               <Link
                 key={item.key}
                 href={item.href}
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors relative group py-2"
+                className="text-gray-700 hover:text-blue-600 font-bold transition-colors relative group py-2"
               >
                 {t(item.key)}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 right-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full mx-auto" />
               </Link>
             ))}
           </div>
@@ -82,7 +65,7 @@ const Navigation = () => {
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center space-x-1 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              className="flex items-center space-x-1 px-3 py-2"
               title={t('nav.language')}
             >
               <Globe className="w-4 h-4" />

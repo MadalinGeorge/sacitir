@@ -116,7 +116,7 @@ export default function Career() {
   };
 
   return (
-    <div className="min-h-screen pt-16 lg:pt-20">
+    <div className="min-h-screen pt-16 lg:pt-20 bg-white">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -132,13 +132,13 @@ export default function Career() {
       </section>
 
       {/* Job Listings Section */}
-      <section className="section bg-white dark:bg-gray-900">
+      <section className="section bg-white">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               {t('career.currentOpenings')}
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               {t('career.joinTeam')}
             </p>
           </div>
@@ -146,16 +146,16 @@ export default function Career() {
           {loading ? (
             <div className="flex justify-center items-center py-20">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-              <span className="ml-4 text-gray-600 dark:text-gray-300">{t('common.loading')}</span>
+              <span className="ml-4 text-gray-600">{t('common.loading')}</span>
             </div>
           ) : jobs.length === 0 ? (
             <div className="text-center py-20">
-              <div className="bg-gray-100 dark:bg-gray-800 p-12 rounded-2xl shadow-lg inline-block">
+              <div className="bg-gray-100 p-12 rounded-2xl shadow-lg inline-block">
                 <Briefcase className="w-16 h-16 text-blue-600 mx-auto mb-6" />
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
                   {t('career.noJobs')}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-6">
+                <p className="text-gray-600 mb-6">
                   {t('career.checkBack')}
                 </p>
                 <a
@@ -173,14 +173,14 @@ export default function Career() {
                 <div key={job.id} className="card p-8 group hover:shadow-2xl transition-all duration-300">
                   <div className="flex justify-between items-start mb-6">
                     <div>
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">
                         {job.title}
                       </h3>
-                      <div className="flex items-center text-gray-600 dark:text-gray-300 mb-2">
+                      <div className="flex items-center text-gray-600 mb-2">
                         <Briefcase className="w-4 h-4 mr-2" />
                         <span>{job.department}</span>
                       </div>
-                      <div className="flex items-center text-gray-600 dark:text-gray-300 mb-4">
+                      <div className="flex items-center text-gray-600 mb-4">
                         <MapPin className="w-4 h-4 mr-2" />
                         <span>{job.location}</span>
                       </div>
@@ -191,32 +191,32 @@ export default function Career() {
                   </div>
 
                   {job.salary && (
-                    <div className="flex items-center text-gray-600 dark:text-gray-300 mb-4">
+                    <div className="flex items-center text-gray-600 mb-4">
                       <DollarSign className="w-4 h-4 mr-2" />
                       <span className="font-medium">{job.salary}</span>
                     </div>
                   )}
 
-                  <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                  <p className="text-gray-600 mb-6 leading-relaxed">
                     {job.description}
                   </p>
 
                   <div className="mb-6">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                    <h4 className="font-semibold text-gray-900 mb-3">
                       {t('career.requirements')}
                     </h4>
                     <ul className="space-y-2">
                       {job.requirements.map((req, index) => (
                         <li key={index} className="flex items-start">
                           <CheckCircle className="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-600 dark:text-gray-300 text-sm">{req}</span>
+                          <span className="text-gray-600 text-sm">{req}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-gray-700">
-                    <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                  <div className="flex items-center justify-between pt-6 border-t border-gray-200">
+                    <div className="flex items-center text-sm text-gray-500">
                       <Clock className="w-4 h-4 mr-1" />
                       <span>Posted {job.posted}</span>
                     </div>
@@ -238,15 +238,15 @@ export default function Career() {
       {/* Application Form Modal */}
       {showApplicationForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-8">
               <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                <h3 className="text-2xl font-bold text-gray-900">
                   {t('career.applicationForm.title')}
                 </h3>
                 <button
                   onClick={() => setShowApplicationForm(false)}
-                  className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+                  className="text-gray-500 hover:text-gray-700"
                 >
                   ✕
                 </button>
@@ -255,10 +255,10 @@ export default function Career() {
               {submitStatus === 'success' ? (
                 <div className="text-center py-8">
                   <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
-                  <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  <h4 className="text-xl font-bold text-gray-900 mb-2">
                     {t('career.applicationForm.success')}
                   </h4>
-                  <p className="text-gray-600 dark:text-gray-300">
+                  <p className="text-gray-600">
                     We'll be in touch soon!
                   </p>
                 </div>
@@ -266,7 +266,7 @@ export default function Career() {
                 <form onSubmit={handleSubmitApplication} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         {t('career.applicationForm.name')}
                       </label>
                       <input
@@ -274,11 +274,11 @@ export default function Career() {
                         required
                         value={applicationData.name}
                         onChange={(e) => setApplicationData(prev => ({ ...prev, name: e.target.value }))}
-                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         {t('career.applicationForm.email')}
                       </label>
                       <input
@@ -286,25 +286,25 @@ export default function Career() {
                         required
                         value={applicationData.email}
                         onChange={(e) => setApplicationData(prev => ({ ...prev, email: e.target.value }))}
-                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
                       />
                     </div>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         {t('career.applicationForm.phone')}
                       </label>
                       <input
                         type="tel"
                         value={applicationData.phone}
                         onChange={(e) => setApplicationData(prev => ({ ...prev, phone: e.target.value }))}
-                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         {t('career.applicationForm.position')}
                       </label>
                       <input
@@ -312,20 +312,20 @@ export default function Career() {
                         required
                         value={applicationData.position}
                         onChange={(e) => setApplicationData(prev => ({ ...prev, position: e.target.value }))}
-                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       {t('career.applicationForm.message')}
                     </label>
                     <textarea
                       rows={4}
                       value={applicationData.message}
                       onChange={(e) => setApplicationData(prev => ({ ...prev, message: e.target.value }))}
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
                       placeholder="Tell us why you're interested in this position..."
                     />
                   </div>
@@ -334,7 +334,7 @@ export default function Career() {
                     <button
                       type="button"
                       onClick={() => setShowApplicationForm(false)}
-                      className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                      className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                     >
                       {t('common.cancel')}
                     </button>
@@ -364,13 +364,13 @@ export default function Career() {
       )}
 
       {/* Why Work With Us Section */}
-      <section className="section bg-gray-50 dark:bg-gray-800">
+      <section className="section bg-gray-50">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               {t('career.whyWork.title')}
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               {t('career.whyWork.description')}
             </p>
           </div>
@@ -378,28 +378,28 @@ export default function Career() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="card p-8 text-center">
               <Users className="w-12 h-12 text-blue-600 mx-auto mb-6" />
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
                 {t('career.whyWork.team.title')}
               </h3>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-gray-600">
                 {t('career.whyWork.team.description')}
               </p>
             </div>
             <div className="card p-8 text-center">
               <DollarSign className="w-12 h-12 text-blue-600 mx-auto mb-6" />
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
                 {t('career.whyWork.benefits.title')}
               </h3>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-gray-600">
                 {t('career.whyWork.benefits.description')}
               </p>
             </div>
             <div className="card p-8 text-center">
               <Briefcase className="w-12 h-12 text-blue-600 mx-auto mb-6" />
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
                 {t('career.whyWork.growth.title')}
               </h3>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-gray-600">
                 {t('career.whyWork.growth.description')}
               </p>
             </div>
@@ -409,4 +409,3 @@ export default function Career() {
     </div>
   );
 }
-

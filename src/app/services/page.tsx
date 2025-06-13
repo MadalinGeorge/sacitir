@@ -45,7 +45,7 @@ export default function Services() {
   };
 
   return (
-    <div className="min-h-screen pt-16 lg:pt-20">
+    <div>
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700">
         <Parallax speed={-20} className="absolute inset-0">
