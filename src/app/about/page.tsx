@@ -46,7 +46,7 @@ export default function About() {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: 'url("https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80")',
+              backgroundImage: 'url("/images/hero/hero-1.png")',
             }}
           />
         </div>
@@ -122,7 +122,7 @@ export default function About() {
 
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80"
+                src="/images/about/history.jpg"
                 alt="SACITIR history"
                 className="rounded-xl shadow-2xl"
               />

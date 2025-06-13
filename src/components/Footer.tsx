@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useLocale } from '@/context/LocaleContext';
 import { Truck, Mail, Phone, MapPin, Clock } from 'lucide-react';
 
@@ -29,9 +30,13 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <div className="bg-blue-600 p-2 rounded-lg">
-                <Truck className="w-6 h-6 text-white" />
-              </div>
+              <Image 
+                src="/images/logo/logo-solo-original.svg" 
+                alt="SACITIR Logo" 
+                width={32} 
+                height={32} 
+                className="w-8 h-8"
+              />
               <span className="text-2xl font-bold">SACITIR</span>
             </div>
             <p className="text-gray-400 mb-6">

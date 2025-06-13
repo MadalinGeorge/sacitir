@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useLocale } from '@/context/LocaleContext';
 import { Menu, X, Globe, Truck } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -51,13 +52,15 @@ const Navigation = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="bg-blue-600 p-2 rounded-lg group-hover:bg-blue-700 transition-colors">
-              <Truck className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-xl lg:text-2xl font-bold text-gray-900">
-              SACITIR
-            </span>
+          <Link href="/" className="flex items-center space-x-2">
+            <Image 
+              src="/images/logo/logo-solo-original.svg" 
+              alt="SACITIR Logo" 
+              width={40} 
+              height={40} 
+              className="w-10 h-10"
+            />
+            <span className="text-xl font-bold">SACITIR</span>
           </Link>
 
           {/* Desktop Navigation */}

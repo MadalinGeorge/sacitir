@@ -9,16 +9,16 @@ const en = {
   },
   home: {
     hero: {
-      title: 'Reliable Freight Transport Solutions',
-      subtitle: 'SACITIR - Your trusted partner for safe and efficient cargo transportation across the nation',
+      title: 'Quality Transport Solutions',
+      subtitle: 'Transportes Sacitir - Your reliable partner for safe and efficient cargo transportation',
       cta: 'Get Quote',
       learnMore: 'Learn More'
     },
     about: {
-      title: 'About SACITIR',
-      description: 'With over 20 years of experience in freight transportation, SACITIR has established itself as a leading logistics company, providing reliable and efficient transport solutions nationwide.',
-      experience: '20+ Years of Experience',
-      coverage: 'Nationwide Coverage',
+      title: 'About Transportes Sacitir',
+      description: 'Founded in 2020 by two brothers with a shared vision, our company has grown rapidly in the transport sector, establishing a firm commitment to quality, efficiency, and customer satisfaction.',
+      experience: 'Professional Team',
+      coverage: 'National & International',
       support: '24/7 Support',
       deliveries: '1000+',
       deliveriesText: 'Successful Deliveries'
@@ -27,103 +27,108 @@ const en = {
       title: 'Our Services',
       viewAll: 'View All Services',
       national: {
-        title: 'National Transport',
-        description: 'Comprehensive freight transport solutions across the country'
+        title: 'National & International Transport',
+        description: 'Specialized in transporting goods nationally and internationally, ensuring timely and safe delivery'
       },
       refrigerated: {
         title: 'Refrigerated Transport',
-        description: 'Temperature-controlled transport for sensitive cargo'
+        description: 'Fleet of refrigerated trucks for perishable products, ensuring optimal conditions upon arrival'
       },
       logistics: {
-        title: 'Logistics Solutions',
-        description: 'Complete logistics management and supply chain optimization'
+        title: 'Customized Logistics Solutions',
+        description: 'Working closely with clients to develop logistics solutions tailored to their specific needs'
       }
     },
     cta: {
       title: 'Ready to Ship Your Cargo?',
-      description: 'Get a free quote today and experience reliable freight transport',
+      description: 'Get a free quote today and experience reliable freight transport with our Euro 6 latest generation trucks',
       button: 'Get Free Quote'
     }
   },
   about: {
-    title: 'About SACITIR',
-    subtitle: 'Connecting businesses nationwide with reliable freight solutions since 2003',
+    title: 'About Transportes Sacitir',
+    subtitle: 'Quality and efficiency in transport since 2020',
     history: {
       title: 'Our History',
-      content: 'Founded in 2003, SACITIR began as a small family business with a vision to provide reliable freight transport services. Over the years, we have grown to become one of the most trusted logistics companies in the region.'
+      content: 'The story of Transportes Sacitir begins with the passion of two brothers who, after identifying a need in the transport sector, decided to join forces to create a company that not only met market standards but also offered exceptional service. From day one, we have focused on offering logistics solutions that adapt to our clients\' needs, which has allowed us to grow and expand our operations in a short period of time.'
     },
     mission: {
       title: 'Our Mission',
-      content: 'To provide safe, reliable, and efficient freight transport solutions while maintaining the highest standards of customer service and operational excellence.'
+      content: 'Our mission is to provide safe, efficient, and personalized transport services. We strive to be a reliable partner in the supply chain, ensuring that each load reaches its destination in a timely manner and in perfect condition. We believe that open communication and transparency are fundamental to building strong relationships with our clients.'
     },
     vision: {
       title: 'Our Vision',
-      content: 'To be the leading freight transport company, recognized for our commitment to innovation, sustainability, and customer satisfaction.'
+      content: 'We aspire to be leaders in the transport sector, recognized for our innovation, commitment to quality, and customer service. Our vision is to expand our operations nationally and internationally, always maintaining our core values and adapting to the changing needs of the market.'
     },
     values: {
       title: 'Our Values',
       description: 'The principles that guide our operations and relationships',
       safety: {
-        title: 'Safety First',
-        description: 'We prioritize the safety of our drivers, cargo, and the communities we serve through rigorous safety protocols and training.'
+        title: 'Commitment',
+        description: 'We are dedicated to fulfilling our promises and exceeding our clients\' expectations. Every member of our team is committed to excellence in service.'
       },
       reliability: {
-        title: 'Reliability',
-        description: 'Our commitment to on-time delivery and consistent service has made us a trusted partner for businesses nationwide.'
+        title: 'Integrity',
+        description: 'We operate with transparency and honesty in all our interactions, building relationships of trust with our clients and partners.'
       },
       customer: {
-        title: 'Customer Focus',
-        description: 'We build lasting relationships by understanding our customers\' needs and delivering personalized logistics solutions.'
+        title: 'Teamwork',
+        description: 'We value collaboration and joint effort, both within our company and with our partners and clients. We believe that teamwork is key to success.'
       },
       sustainability: {
-        title: 'Sustainability',
-        description: 'We are committed to reducing our environmental impact through efficient routes and eco-friendly practices.'
+        title: 'Innovation',
+        description: 'We constantly seek to improve our processes and services to adapt to a changing environment. Innovation is part of our business culture.'
       }
     },
     heritage: {
-      family: 'Family-Owned Heritage',
-      familyDesc: 'Built on family values and personal relationships',
-      growth: 'Continuous Growth',
-      growthDesc: 'Expanded from local to nationwide operations',
-      leadership: 'Industry Leadership',
-      leadershipDesc: 'Recognized as a trusted logistics partner'
+      family: 'Family-Founded Business',
+      familyDesc: 'Started by two brothers with a shared vision',
+      growth: 'Rapid Growth',
+      growthDesc: 'Expanded operations in a short period of time',
+      leadership: 'Industry Innovation',
+      leadershipDesc: 'Using Euro 6 latest generation trucks with GPS tracking'
     },
     cta: {
       title: 'Ready to Partner with Us?',
-      description: 'Experience the SACITIR difference with our reliable freight transport solutions',
+      description: 'Experience the Transportes Sacitir difference with our reliable transport solutions',
       button: 'Get Started Today',
       learnMore: 'Explore Services'
     }
   },
   services: {
     title: 'Our Services',
-    subtitle: 'Comprehensive freight transport and logistics solutions',
+    subtitle: 'Comprehensive transport and logistics solutions',
     learnMore: 'Learn More',
     cta: {
       title: 'Ready to Ship Your Cargo?',
-      description: 'Get a free quote today and experience our reliable freight transport services',
+      description: 'Get a free quote today and experience our reliable transport services',
       button: 'Get Free Quote',
       learnMore: 'Learn About Us'
     },
     national: {
-      title: 'National Transport',
-      description: 'Complete freight transport services covering all major routes across the country. We ensure your cargo reaches its destination safely and on time.',
-      features: ['Door-to-door delivery', 'Real-time tracking', 'Insurance coverage', '24/7 support']
+      title: 'National & International Transport',
+      description: 'We specialize in transporting goods nationally and internationally, ensuring timely and safe delivery of your products.',
+      features: ['Door-to-door delivery', 'Real-time GPS tracking', 'Insurance coverage', '24/7 support']
     },
     refrigerated: {
       title: 'Refrigerated Transport',
-      description: 'Specialized temperature-controlled transport for perishable goods, pharmaceuticals, and other temperature-sensitive cargo.',
+      description: 'We have a fleet of refrigerated trucks that allow the transport of perishable products, ensuring they reach their destination in optimal conditions.',
       features: ['Temperature monitoring', 'Cold chain compliance', 'Specialized equipment', 'Quality assurance']
     },
     logistics: {
-      title: 'Logistics Solutions',
-      description: 'Complete logistics management including warehousing, distribution, and supply chain optimization services.',
-      features: ['Warehouse management', 'Supply chain optimization', 'Inventory control', 'Distribution planning']
+      title: 'Customized Logistics Solutions',
+      description: 'We work closely with our clients to develop logistics solutions tailored to their specific needs, ensuring efficient supply chain management.',
+      features: ['Pallet exchange service', 'Supply chain optimization', 'Inventory control', 'Distribution planning']
+    },
+    sustainable: {
+      title: 'High-Quality & Sustainable Transport',
+      description: 'We pride ourselves on offering high-quality transport services, using only Euro 6 latest generation trucks. These vehicles are not only more efficient and environmentally friendly but are also equipped with cutting-edge technology. Thanks to our GPS control system, we can provide the location of each truck in real-time, thus ensuring greater transparency and confidence in our services.',
+      features: ['Euro 6 latest generation trucks', 'Real-time GPS tracking', 'Eco-friendly operations', 'Route optimization']
     }
   },
   career: {
     title: 'Career Opportunities',
-    subtitle: 'Join our team and build your career with SACITIR',
+    subtitle: 'Join our team and build your career with Transportes Sacitir',
     noJobs: 'No job openings available at the moment. Please check back later.',
     apply: 'Apply Now',
     requirements: 'Requirements',
@@ -131,11 +136,11 @@ const en = {
     location: 'Location',
     type: 'Type',
     currentOpenings: 'Current Openings',
-    joinTeam: 'Join our team and build a rewarding career in the logistics industry',
+    joinTeam: 'Join our highly trained and committed team of professionals',
     contactUs: 'Contact Us',
     checkBack: 'Check back soon for new opportunities or contact us directly.',
     whyWork: {
-      title: 'Why Work With SACITIR?',
+      title: 'Why Work With Transportes Sacitir?',
       description: 'We offer competitive benefits and a supportive work environment',
       team: {
         title: 'Great Team',
@@ -174,7 +179,7 @@ const en = {
       namePlaceholder: 'Your full name',
       emailPlaceholder: 'your.email@example.com',
       subjectPlaceholder: 'How can we help you?',
-      messagePlaceholder: 'Tell us about your freight transport needs...',
+      messagePlaceholder: 'Tell us about your transport needs...',
       submit: 'Send Message',
       sending: 'Sending...',
       success: 'Message sent successfully!',
@@ -200,7 +205,7 @@ const en = {
     },
     immediateAssistance: {
       title: 'Need Immediate Assistance?',
-      description: 'Our team is ready to help with your freight transport needs'
+      description: 'Our team is ready to help with your transport needs'
     },
     quickActions: {
       call: {

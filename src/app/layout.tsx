@@ -15,6 +15,10 @@ export const metadata: Metadata = {
   keywords: "freight transport, cargo, logistics, shipping, refrigerated transport, national transport, SACITIR",
   authors: [{ name: "SACITIR" }],
   robots: "index, follow",
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/images/logo/logo.jpg',
+  },
   openGraph: {
     title: "SACITIR - Reliable Freight Transport Solutions",
     description: "SACITIR provides safe, reliable, and efficient freight transport solutions nationwide.",

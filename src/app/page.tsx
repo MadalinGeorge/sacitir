@@ -14,7 +14,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-screen min-h-[600px] flex items-center">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-blue-700/80 z-10"></div>
-        <div className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center"></div>
+        <div className="absolute inset-0 bg-[url('/images/home/home-1.png')] bg-cover bg-center"></div>
         
         <div className="container relative z-20 text-white mt-16">
           <div className="max-w-3xl">
@@ -77,7 +77,7 @@ export default function Home() {
             <Parallax speed={5}>
               <div className="relative">
                 <img
-                  src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80"
+                  src="/images/home/home-1.png"
                   alt="SACITIR trucks"
                   className="rounded-xl shadow-2xl"
                 />
