@@ -65,7 +65,7 @@ export default function Contact() {
         {/* Page Header */}
         <div className="text-center mb-12 md:mb-16">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">{t('contact.title')}</h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg text-secondaryBlack/80 max-w-2xl mx-auto">
             {t('contact.subtitle')}
           </p>
         </div>
@@ -78,36 +78,36 @@ export default function Contact() {
               
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-lg">
-                    <Mail className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                  <div className="bg-mainRed/10 p-3 rounded-lg">
+                    <Mail className="w-5 h-5 text-mainRed" />
                   </div>
                   <div>
                     <h3 className="font-medium">{t('contact.email')}</h3>
-                    <a href="mailto:info@sacitir.com" className="text-blue-600 dark:text-blue-400 hover:underline">
+                    <a href="mailto:info@sacitir.com" className="text-mainRed hover:underline">
                       info@sacitir.com
                     </a>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-lg">
-                    <Phone className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                  <div className="bg-mainRed/10 p-3 rounded-lg">
+                    <Phone className="w-5 h-5 text-mainRed" />
                   </div>
                   <div>
                     <h3 className="font-medium">{t('contact.phone')}</h3>
-                    <a href="tel:+34911234567" className="text-blue-600 dark:text-blue-400 hover:underline">
+                    <a href="tel:+34911234567" className="text-mainRed hover:underline">
                       +34 91 123 4567
                     </a>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-lg">
-                    <MapPin className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                  <div className="bg-mainRed/10 p-3 rounded-lg">
+                    <MapPin className="w-5 h-5 text-mainRed" />
                   </div>
                   <div>
                     <h3 className="font-medium">{t('contact.address')}</h3>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <p className="text-secondaryBlack/80">
                       Calle Ejemplo 123<br />
                       28001 Madrid, España
                     </p>
@@ -115,12 +115,12 @@ export default function Contact() {
                 </div>
                 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-lg">
-                    <Clock className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                  <div className="bg-mainRed/10 p-3 rounded-lg">
+                    <Clock className="w-5 h-5 text-mainRed" />
                   </div>
                   <div>
                     <h3 className="font-medium">{t('contact.hours')}</h3>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <p className="text-secondaryBlack/80">
                       {t('contact.weekdays')}: 9:00 - 18:00<br />
                       {t('contact.weekend')}: {t('contact.closed')}
                     </p>
@@ -189,11 +189,11 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={submitStatus === 'loading'}
-                  className="w-full btn-primary bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center py-4"
+                  className="w-full btn-primary bg-mainRed hover:bg-mainRed/90 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center py-4"
                 >
                   {submitStatus === 'loading' ? (
                     <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-textWhite mr-2"></div>
                       {t('contact.form.sending')}
                     </>
                   ) : (
@@ -204,13 +204,13 @@ export default function Contact() {
                   )}
                 </button>
                 {submitStatus === 'error' && (
-                  <div className="flex items-center p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-                    <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 mr-3 flex-shrink-0" />
+                  <div className="flex items-center p-4 bg-mainRed/10 border border-mainRed/20 rounded-lg">
+                    <AlertCircle className="w-5 h-5 text-mainRed mr-3 flex-shrink-0" />
                     <div>
-                      <p className="text-red-600 dark:text-red-400 font-medium">
+                      <p className="text-mainRed font-medium">
                         {t('contact.form.error')}
                       </p>
-                      <p className="text-red-500 dark:text-red-500 text-sm mt-1">
+                      <p className="text-mainRed/80 text-sm mt-1">
                         {t('contact.form.errorMessage')}
                       </p>
                     </div>
