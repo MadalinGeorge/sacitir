@@ -81,10 +81,6 @@ export default function Home() {
                   alt="SACITIR trucks"
                   className="rounded-xl shadow-2xl"
                 />
-                <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-xl shadow-xl">
-                  <div className="text-3xl font-bold">{t('home.about.deliveries')}</div>
-                  <div className="text-sm">{t('home.about.deliveriesText')}</div>
-                </div>
               </div>
             </Parallax>
           </div>
@@ -192,10 +188,6 @@ export default function Home() {
                   alt="SACITIR trucks"
                   className="rounded-xl shadow-2xl"
                 />
-                <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-xl shadow-xl">
-                  <div className="text-3xl font-bold">{t('home.about.deliveries')}</div>
-                  <div className="text-sm">{t('home.about.deliveriesText')}</div>
-                </div>
               </div>
             </Parallax>
           </div>

@@ -20,8 +20,6 @@ const es = {
       experience: 'Equipo Profesional',
       coverage: 'Nacional e Internacional',
       support: 'Soporte 24/7',
-      deliveries: '1000+',
-      deliveriesText: 'Entregas Exitosas'
     },
     services: {
       title: 'Nuestros Servicios',
