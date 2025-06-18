@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import en from '@/locales/en';
 import es from '@/locales/es';
 
-type TranslationType = Record<string, string | Record<string, string>>;
+type TranslationType = Record<string, any>;
 type Locale = 'en' | 'es';
 
 interface LocaleContextType {
@@ -16,13 +16,13 @@ interface LocaleContextType {
 const translations: Record<Locale, TranslationType> = { en, es };
 
 const LocaleContext = createContext<LocaleContextType>({
-  locale: 'en',
+  locale: 'es',
   setLocale: () => {},
   t: () => '',
 });
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocale] = useState<Locale>('en');
+  const [locale, setLocale] = useState<Locale>('es');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Parallax } from 'react-scroll-parallax';
 import { useLocale } from '@/context/LocaleContext';
 import { ArrowRight, CheckCircle, Truck, Snowflake, Package } from 'lucide-react';
@@ -8,6 +8,11 @@ import Link from 'next/link';
 
 export default function Home() {
   const { t } = useLocale();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   return (
     <div className="bg-white">
@@ -18,7 +23,7 @@ export default function Home() {
 
         <div className="container relative z-20 text-textWhite mt-12 md:mt-24">
           <div className="max-w-3xl">
-            <Parallax speed={-5} className="md:block" disabled={typeof window !== 'undefined' && window.innerWidth < 768}>
+            <Parallax speed={-5} className="md:block" disabled={isMobile}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight">
                 {t('home.hero.title')}
               </h1>

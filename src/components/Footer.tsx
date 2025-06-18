@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLocale } from '@/context/LocaleContext';
@@ -8,6 +8,11 @@ import { Truck, Mail, Phone, MapPin, Clock } from 'lucide-react';
 
 const Footer = () => {
   const { t } = useLocale();
+  const [year, setYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
 
   const navLinks = [
     { key: 'nav.home', href: '/' },
@@ -130,7 +135,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="border-t border-textWhite/20 pt-8 text-center text-textWhite/60">
-          <p>© {new Date().getFullYear()} SACITIR. All rights reserved.</p>
+          {year && <p>© {year} SACITIR. All rights reserved.</p>}
         </div>
       </div>
     </footer>
