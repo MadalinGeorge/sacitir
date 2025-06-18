@@ -63,7 +63,7 @@ a {
 
 /* Section Styles */
 .section {
-  @apply py-16 md:py-24;
+  @apply py-12 md:py-16 lg:py-24;
 }
 
 .section-sm {
@@ -97,11 +97,18 @@ a {
 }
 
 main {
-  padding-top: 5rem;
+  padding-top: 4rem; /* Reduced from 5rem for mobile */
 }
 
+@media (min-width: 768px) {
+  main {
+    padding-top: 5rem; /* Original value for desktop */
+  }
+}
+
+/* Adjust section spacing for better mobile experience */
 .section {
-  @apply py-16 md:py-24;
+  @apply py-12 md:py-16 lg:py-24;
 }
 
 .section-sm {
