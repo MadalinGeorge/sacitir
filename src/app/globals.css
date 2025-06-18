@@ -32,15 +32,15 @@ a {
 
 /* Button Styles */
 .btn-primary {
-  @apply bg-mainRed text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors duration-200 font-medium;
+  @apply bg-mainRed text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors duration-200 font-medium items-center justify-center;
 }
 
 .btn-secondary {
-  @apply bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors duration-200 font-medium;
+  @apply bg-secondaryPlatinium text-secondaryBlack px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors duration-200 font-medium;
 }
 
 .btn-outline {
-  @apply border-2 border-mainRed text-mainRed px-6 py-3 rounded-lg hover:bg-mainRed hover:text-textWhite transition-colors duration-200 font-medium;
+  @apply border-2 border-secondaryPlatinium text-secondaryPlatinium px-6 py-3 rounded-lg hover:border-mainRed hover:bg-mainRed hover:text-textWhite transition-colors duration-200 font-medium items-center justify-center;
 }
 
 /* Card Styles */
@@ -88,22 +88,18 @@ a {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
 }
 
-/* Loading spinner */
 .spinner {
   @apply animate-spin rounded-full border-4 border-gray-200 border-t-blue-600;
 }
 
-/* Gradient backgrounds */
 .gradient-primary {
   @apply bg-gradient-to-r from-blue-700 to-blue-900;
 }
 
-/* Add this to your globals.css file */
 main {
-  padding-top: 5rem; /* Adjust this value to match your navigation height */
+  padding-top: 5rem;
 }
 
-/* Update section styles to remove top padding that might be redundant */
 .section {
   @apply py-16 md:py-24;
 }
@@ -115,4 +111,3 @@ main {
 .section-lg {
   @apply py-20 md:py-32;
 }
-
