@@ -3,6 +3,8 @@
 import React from 'react';
 import { useLocale } from '@/context/LocaleContext';
 import { CheckCircle, Users, Award, Globe, Truck, Shield, Clock, Heart } from 'lucide-react';
+import Link from 'next/link';
+
 
 export default function About() {
   const { t } = useLocale();
@@ -208,18 +210,18 @@ export default function About() {
             {t('about.cta.description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
+            <Link
               href="/contact"
-              className="btn-secondary bg-textWhite text-mainRed hover:bg-secondaryPlatinium inline-flex items-center justify-center"
+              className="btn-secondary"
             >
               {t('about.cta.button')}
-            </a>
-            <a
+            </Link>
+            <Link
               href="/services"
-              className="btn-outline border-textWhite text-textWhite hover:bg-textWhite hover:text-secondaryBlack inline-flex items-center justify-center"
+              className="btn-secondary"
             >
               {t('about.cta.learnMore')}
-            </a>
+            </Link>
           </div>
         </div>
       </section>

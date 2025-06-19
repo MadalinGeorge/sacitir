@@ -32,15 +32,15 @@ a {
 
 /* Button Styles */
 .btn-primary {
-  @apply bg-mainRed text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors duration-200 font-medium items-center justify-center;
+  @apply px-6 py-3 rounded-xl text-white bg-mainRed/50 border border-mainRed backdrop-blur-md shadow-md hover:bg-mainRed/70 hover:shadow-lg font-semibold transition-all font-medium;
 }
 
 .btn-secondary {
-  @apply bg-secondaryPlatinium text-secondaryBlack px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors duration-200 font-medium;
+  @apply px-6 py-3 rounded-md bg-glassGray/70 text-secondaryBlack font-semibold backdrop-blur-md border border-white/20 shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300;
 }
 
 .btn-outline {
-  @apply border-2 border-secondaryPlatinium text-secondaryPlatinium px-6 py-3 rounded-lg hover:border-mainRed hover:bg-mainRed hover:text-textWhite transition-colors duration-200 font-medium items-center justify-center;
+  @apply px-6 py-3 rounded-xl text-textWhite bg-mainRed/10 border border-mainRed/20 backdrop-blur-md shadow-md transition-all hover:bg-mainRed/20 hover:shadow-lg font-medium;
 }
 
 /* Card Styles */

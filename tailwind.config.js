@@ -12,6 +12,7 @@ module.exports = {
         secondaryBlack: '#191923',
         secondaryPlatinium: '#E0E0E2',
         textWhite: '#FBFFFE',
+        glassGray: '#F1F5F9',
       },
     },
   },

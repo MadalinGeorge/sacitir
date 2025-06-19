@@ -94,7 +94,7 @@ export default function Services() {
                     </div>
                     <Link
                       href="/contact"
-                      className={`btn-primary ${service.buttonBg} inline-flex items-center`}
+                      className="btn-primary  text-secondaryBlack inline-flex items-center"
                     >
                       {t('services.learnMore')}
                       <ArrowRight className="w-5 h-5 ml-2" />
