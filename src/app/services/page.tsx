@@ -13,24 +13,17 @@ export default function Services() {
     {
       key: 'national',
       image: '/images/services/services-1.jpg',
-      buttonBg: 'bg-blue-600 hover:bg-blue-700',
-      cardAccent: 'bg-blue-600'
     },
     {
       key: 'refrigerated',
       image: '/images/services/services-2.png',
-      buttonBg: 'bg-cyan-600 hover:bg-cyan-700',
-      cardAccent: 'bg-cyan-600'
     },
     {
       key: 'logistics',
       image: '/images/services/services-3.jpg',
-      buttonBg: 'bg-green-600 hover:bg-green-700',
-      cardAccent: 'bg-green-600'
     }
   ];
 
-  // Helper function to safely get features array
   const getFeatures = (key: string): string[] => {
     try {
       const features = t(`services.${key}.features`);
@@ -47,7 +40,7 @@ export default function Services() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700">
+      <section className="relative h-[82vh] flex items-center justify-center overflow-hidden ">
         <Parallax speed={-20} className="absolute inset-0">
           <div className="absolute inset-0 bg-black/40" />
           <div 
@@ -58,12 +51,12 @@ export default function Services() {
           />
         </Parallax>
 
-        <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <div className="relative z-10 text-center text-white mb-80 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
           <Parallax speed={5}>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl text-mainRed sm:text-5xl lg:text-6xl font-bold mb-5 leading-tight">
               {t('services.title')}
             </h1>
-            <p className="text-xl sm:text-2xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl text-textWhite sm:text-2xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
               {t('services.subtitle')}
             </p>
           </Parallax>
@@ -73,12 +66,12 @@ export default function Services() {
       {/* Main Services */}
       <section className="section bg-white">
         <div className="container">
-          <div className="space-y-32"> {/* Increased spacing between service items */}
+          <div className="space-y-32">
             {services.map((service, index) => (
               <div key={service.key} className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
                 <Parallax speed={index % 2 === 0 ? -5 : 5}>
                   <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-                    <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
+                    <h2 className="text-3xl lg:text-4xl font-bold text-secondaryBlack">
                       {t(`services.${service.key}.title`)}
                     </h2>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -87,14 +80,14 @@ export default function Services() {
                     <div className="space-y-3">
                       {getFeatures(service.key).map((feature, idx) => (
                         <div key={idx} className="flex items-center space-x-3">
-                          <CheckCircle className="w-5 h-5 text-blue-600" />
+                          <CheckCircle className="w-5 h-5 text-mainRed" />
                           <span className="text-gray-700">{feature}</span>
                         </div>
                       ))}
                     </div>
                     <Link
                       href="/contact"
-                      className="btn-primary  text-secondaryBlack inline-flex items-center"
+                      className="btn-primary-white-bg inline-flex items-center"
                     >
                       {t('services.learnMore')}
                       <ArrowRight className="w-5 h-5 ml-2" />
@@ -118,13 +111,8 @@ export default function Services() {
       </section>
 
       {/* CTA Section */}
-      <section className="section gradient-primary relative overflow-hidden">
-        <Parallax speed={-15} className="absolute inset-0">
-          <div className="absolute inset-0 bg-black/20" />
-        </Parallax>
-        
+      <section className="section bg-mainRed relative overflow-hidden">
         <div className="container relative z-10 text-center text-white">
-          <Parallax speed={5}>
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               {t('services.cta.title')}
             </h2>
@@ -134,19 +122,18 @@ export default function Services() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
-                className="btn-secondary bg-white text-blue-600 hover:bg-gray-100 inline-flex items-center justify-center"
+                className="btn-secondary inline-flex items-center justify-center"
               >
                 {t('services.cta.button')}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
               <Link
                 href="/about"
-                className="btn-outline border-white text-white hover:bg-white hover:text-blue-900 inline-flex items-center justify-center"
+                className="btn-secondary inline-flex items-center justify-center"
               >
                 {t('services.cta.learnMore')}
               </Link>
             </div>
-          </Parallax>
         </div>
       </section>
     </div>

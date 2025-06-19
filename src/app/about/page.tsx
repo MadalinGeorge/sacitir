@@ -54,7 +54,7 @@ export default function About() {
         </div>
 
         <div className="relative z-10 text-center text-textWhite px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <h1 className="text-4xl text-mainRed sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
             {t('about.title')}
           </h1>
           <p className="text-xl sm:text-2xl text-textWhite/90 max-w-2xl mx-auto leading-relaxed">
@@ -128,10 +128,6 @@ export default function About() {
                 alt="SACITIR history"
                 className="rounded-xl shadow-2xl"
               />
-              <div className="absolute -bottom-6 -left-6 bg-mainRed text-textWhite p-6 rounded-xl shadow-xl">
-                <div className="text-2xl font-bold">2003</div>
-                <div className="text-sm">Founded</div>
-              </div>
             </div>
           </div>
         </div>

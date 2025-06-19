@@ -10,7 +10,7 @@ type Locale = 'en' | 'es';
 interface LocaleContextType {
   locale: Locale;
   setLocale: (locale: Locale) => void;
-  t: (key: string) => string;
+  t: (key: string) => string | string[];
 }
 
 const translations: Record<Locale, TranslationType> = { en, es };
@@ -39,8 +39,8 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     }
   }, [locale, mounted]);
 
-  // Improved translation function that handles nested keys
-  const t = (key: string): string => {
+  // Improved translation function that handles nested keys and arrays
+  const t = (key: string): string | string[] => {
     const keys = key.split('.');
     let result: any = translations[locale];
     
@@ -49,13 +49,20 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
       result = result[k];
     }
     
-    // If result is an object or undefined, return the key as fallback
-    if (typeof result !== 'string') {
-      console.warn(`Translation key "${key}" returned a non-string value:`, result);
+    // If result is undefined, return the key as fallback
+    if (result === undefined) {
+      console.warn(`Translation key "${key}" not found`);
       return key;
     }
     
-    return result;
+    // Allow arrays to be returned (for features lists)
+    if (Array.isArray(result) || typeof result === 'string') {
+      return result;
+    }
+    
+    // For other non-string values, log warning and return key
+    console.warn(`Translation key "${key}" returned a non-string, non-array value:`, result);
+    return key;
   };
 
   return (

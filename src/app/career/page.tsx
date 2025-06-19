@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocale } from '@/context/LocaleContext';
 import { Briefcase, MapPin, Clock, DollarSign, Users, Send, CheckCircle } from 'lucide-react';
+import Link from 'next/link';
+
 
 interface JobOffer {
   id: string;
@@ -116,7 +118,7 @@ export default function Career() {
   };
 
   return (
-    <div className="min-h-screen pt-16 lg:pt-20 bg-textWhite">
+    <div className="min-h-screen bg-textWhite">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-mainRed via-mainRed/90 to-mainRed/80 py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -158,13 +160,13 @@ export default function Career() {
                 <p className="text-secondaryBlack/80 mb-6">
                   {t('career.checkBack')}
                 </p>
-                <a
+                <Link
                   href="/contact"
-                  className="btn-primary inline-flex items-center"
+                  className="btn-primary-white-bg inline-flex items-center"
                 >
                   {t('career.contactUs')}
                   <Send className="w-5 h-5 ml-2" />
-                </a>
+                </Link>
               </div>
             </div>
           ) : (
@@ -222,7 +224,7 @@ export default function Career() {
                     </div>
                     <button
                       onClick={() => handleApply(job)}
-                      className="btn-primary bg-mainRed hover:bg-mainRed/90 inline-flex items-center"
+                      className="btn-primary-white-bg bg-mainRed hover:bg-mainRed/90 inline-flex items-center"
                     >
                       {t('career.apply')}
                       <Send className="w-4 h-4 ml-2" />
@@ -341,7 +343,7 @@ export default function Career() {
                     <button
                       type="submit"
                       disabled={submitStatus === 'loading'}
-                      className="flex-1 btn-primary bg-mainRed hover:bg-mainRed/90 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center"
+                      className="flex-1 btn-primary-white-bg bg-mainRed hover:bg-mainRed/90 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center"
                     >
                       {submitStatus === 'loading' ? (
                         <>
@@ -364,20 +366,20 @@ export default function Career() {
       )}
 
       {/* Why Work With Us Section */}
-      <section className="section bg-gray-50">
+      <section className="section bg-mainRed">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl text-textWhite lg:text-4xl font-bold text-gray-900 mb-4">
               {t('career.whyWork.title')}
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-textWhite max-w-2xl mx-auto">
               {t('career.whyWork.description')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="card p-8 text-center">
-              <Users className="w-12 h-12 text-blue-600 mx-auto mb-6" />
+              <Users className="w-12 h-12 text-mainRed mx-auto mb-6" />
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 {t('career.whyWork.team.title')}
               </h3>
@@ -386,7 +388,7 @@ export default function Career() {
               </p>
             </div>
             <div className="card p-8 text-center">
-              <DollarSign className="w-12 h-12 text-blue-600 mx-auto mb-6" />
+              <DollarSign className="w-12 h-12 text-mainRed mx-auto mb-6" />
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 {t('career.whyWork.benefits.title')}
               </h3>
@@ -395,7 +397,7 @@ export default function Career() {
               </p>
             </div>
             <div className="card p-8 text-center">
-              <Briefcase className="w-12 h-12 text-blue-600 mx-auto mb-6" />
+              <Briefcase className="w-12 h-12 text-mainRed mx-auto mb-6" />
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 {t('career.whyWork.growth.title')}
               </h3>

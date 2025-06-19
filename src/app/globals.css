@@ -35,6 +35,14 @@ a {
   @apply px-6 py-3 rounded-xl text-white bg-mainRed/50 border border-mainRed backdrop-blur-md shadow-md hover:bg-mainRed/70 hover:shadow-lg font-semibold transition-all font-medium;
 }
 
+.btn-primary-white-bg {
+  @apply px-6 py-3 rounded-xl text-textWhite bg-mainRed border border-mainRed shadow-md hover:bg-mainRed/90 hover:shadow-lg font-semibold transition-all font-medium;
+}
+
+.btn-primary-light {
+  @apply px-6 py-3 rounded-xl bg-white text-mainRed border border-mainRed shadow-sm hover:bg-mainRed hover:text-textWhite hover:shadow-md transition-all duration-300 font-semibold;
+}
+
 .btn-secondary {
   @apply px-6 py-3 rounded-md bg-glassGray/70 text-secondaryBlack font-semibold backdrop-blur-md border border-white/20 shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300;
 }

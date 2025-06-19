@@ -24,7 +24,7 @@ export default function Home() {
         <div className="container relative z-20 text-textWhite mt-12 md:mt-24">
           <div className="max-w-3xl">
             <Parallax speed={-5} className="md:block" disabled={isMobile}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight">
+              <h1 className="text-4xl text-mainRed md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight">
                 {t('home.hero.title')}
               </h1>
               <p className="text-xl md:text-2xl text-textWhite/90 mb-8 md:mb-10 leading-relaxed">
@@ -40,7 +40,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="/about"
-                  className="btn-outline inline-flex"
+                  className="btn-primary inline-flex"
                 >
                   {t('home.hero.learnMore')}
                 </Link>

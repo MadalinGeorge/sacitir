@@ -64,7 +64,7 @@ export default function Contact() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">{t('contact.title')}</h1>
+          <h1 className="text-3xl text-mainRed md:text-4xl lg:text-5xl font-bold mb-4">{t('contact.title')}</h1>
           <p className="text-lg text-secondaryBlack/80 max-w-2xl mx-auto">
             {t('contact.subtitle')}
           </p>
@@ -189,7 +189,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={submitStatus === 'loading'}
-                  className="w-full btn-primary bg-mainRed hover:bg-mainRed/90 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center py-4"
+                  className="w-full btn-primary-white-bg disabled:cursor-not-allowed inline-flex items-center justify-center py-4"
                 >
                   {submitStatus === 'loading' ? (
                     <>
