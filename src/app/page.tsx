@@ -6,6 +6,7 @@ import { ArrowRight, CheckCircle, Truck, Snowflake, Package } from 'lucide-react
 import Link from 'next/link';
 import Image from 'next/image';
 import * as motion from 'motion/react-client';
+import { getImagePath } from '@/lib/utils';
 
 export default function Home() {
   const { t } = useLocale();
@@ -19,7 +20,12 @@ export default function Home() {
           initial={{ scale: 1.1, opacity: 0.8 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          className="absolute inset-0 bg-[url('/images/home/home-1.png')] bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${getImagePath('/images/home/home-1.png')})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+          className="absolute inset-0"
         ></motion.div>
 
         <div className="container relative z-20 text-textWhite mt-12 md:mt-24">
@@ -137,7 +143,7 @@ export default function Home() {
               className="relative"
             >
               <Image
-                src="/images/home/home-1.png"
+                src={getImagePath("/images/home/home-1.png")}
                 alt="SACITIR trucks"
                 width={600}
                 height={400}

@@ -119,3 +119,10 @@ export function scrollToElement(elementId: string) {
   }
 }
 
+// Utility function to handle image paths with basePath for GitHub Pages
+export function getImagePath(path: string): string {
+  const isProd = process.env.NODE_ENV === 'production';
+  const basePath = isProd ? '/sacitir' : '';
+  return `${basePath}${path}`;
+}
+

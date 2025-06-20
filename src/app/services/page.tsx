@@ -6,6 +6,7 @@ import { ArrowRight, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import * as motion from 'motion/react-client';
+import { getImagePath } from '@/lib/utils';
 
 export default function Services() {
   const { t } = useLocale();
@@ -18,15 +19,15 @@ export default function Services() {
   const services = [
     {
       key: 'national',
-      image: '/images/services/services-1.jpg',
+      image: getImagePath('/images/services/services-1.jpg'),
     },
     {
       key: 'refrigerated',
-      image: '/images/services/services-2.png',
+      image: getImagePath('/images/services/services-2.png'),
     },
     {
       key: 'logistics',
-      image: '/images/services/services-3.png',
+      image: getImagePath('/images/services/services-3.png'),
     }
   ];
 
@@ -57,7 +58,7 @@ export default function Services() {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: 'url("/images/hero/hero-2.png")',
+              backgroundImage: `url(${getImagePath('/images/hero/hero-2.png')})`,
             }}
           />
         </motion.div>

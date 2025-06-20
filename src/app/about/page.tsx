@@ -6,6 +6,7 @@ import { CheckCircle, Award, Globe, Truck, Shield, Clock, Heart } from 'lucide-r
 import Link from 'next/link';
 import Image from 'next/image';
 import * as motion from 'motion/react-client';
+import { getImagePath } from '@/lib/utils';
 
 export default function About() {
   const { t } = useLocale();
@@ -122,7 +123,7 @@ export default function About() {
       <section 
         ref={statsRef}
         className="relative py-24 bg-cover bg-center bg-fixed"
-        style={{ backgroundImage: 'url("/images/hero/hero-1.png")' }}
+        style={{ backgroundImage: `url(${getImagePath('/images/hero/hero-1.png')})` }}
       >
         <div className="absolute inset-0 bg-secondaryBlack/70"></div>
         <div className="container relative z-10">
@@ -221,7 +222,7 @@ export default function About() {
               className="relative"
             >
               <Image
-                src="/images/about/history.jpg"
+                src={getImagePath("/images/about/history.jpg")}
                 alt="SACITIR history"
                 width={600}
                 height={400}

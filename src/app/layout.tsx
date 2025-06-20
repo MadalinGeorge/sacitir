@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   robots: "index, follow",
   icons: {
     icon: '/favicon.ico',
-    apple: '/images/logo/logo.jpg',
+    apple: '/sacitir/images/logo/logo.jpg',
   },
   openGraph: {
     title: "SACITIR - Reliable Freight Transport Solutions",

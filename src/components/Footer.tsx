@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useLocale } from '@/context/LocaleContext';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { getImagePath } from '@/lib/utils';
 
 const Footer = () => {
   const { t } = useLocale();
@@ -41,7 +42,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center space-x-2 mb-6">
               <Image 
-                src="/images/logo/logo-solo-rojo.svg" 
+                src={getImagePath("/images/logo/logo-solo-rojo.svg")} 
                 alt="SACITIR Logo" 
                 width={32} 
                 height={32} 

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useLocale } from '@/context/LocaleContext';
 import { Menu, X, Globe } from 'lucide-react';
 import AnimatedMobileNav from './AnimatedMobileNav';
+import { getImagePath } from '@/lib/utils';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,7 +49,7 @@ const Navigation = () => {
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <Image 
-                src="/images/logo/logo-full.jpg" 
+                src={getImagePath("/images/logo/logo-full.jpg")} 
                 alt="SACITIR Logo" 
                 width={160} 
                 height={40} 
