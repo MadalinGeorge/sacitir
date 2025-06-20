@@ -10,10 +10,9 @@ export default function About() {
   const { t } = useLocale();
 
   const stats = [
-    { icon: Truck, number: '500+', label: 'Fleet Vehicles' },
-    { icon: Users, number: '150+', label: 'Team Members' },
+    { icon: Truck, number: '20+', label: 'Fleet Vehicles' },
     { icon: Globe, number: '50+', label: 'Cities Served' },
-    { icon: Award, number: '20+', label: 'Years Experience' },
+    { icon: Award, number: '10+', label: 'Years Experience' },
   ];
 
   const values = [
