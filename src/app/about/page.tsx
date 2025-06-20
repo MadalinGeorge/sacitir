@@ -1,18 +1,25 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useLocale } from '@/context/LocaleContext';
 import { CheckCircle, Users, Award, Globe, Truck, Shield, Clock, Heart } from 'lucide-react';
 import Link from 'next/link';
-
+import * as motion from 'motion/react-client';
 
 export default function About() {
   const { t } = useLocale();
+  const [counters, setCounters] = React.useState({
+    fleet: 0,
+    cities: 0,
+    years: 0
+  });
+  
+  const statsRef = useRef(null);
 
   const stats = [
-    { icon: Truck, number: '20+', label: 'Fleet Vehicles' },
-    { icon: Globe, number: '50+', label: 'Cities Served' },
-    { icon: Award, number: '10+', label: 'Years Experience' },
+    { icon: Truck, number: 20, label: 'Fleet Vehicles', key: 'fleet' },
+    { icon: Globe, number: 50, label: 'Cities Served', key: 'cities' },
+    { icon: Award, number: 10, label: 'Years Experience', key: 'years' },
   ];
 
   const values = [
@@ -38,49 +45,100 @@ export default function About() {
     },
   ];
 
+  // Counter animation effect
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          stats.forEach(({ key, number }) => {
+            let startValue = 0;
+            const duration = 2000; // 2 seconds
+            const increment = Math.ceil(number / (duration / 50)); // Update every 50ms
+            
+            const timer = setInterval(() => {
+              startValue += increment;
+              if (startValue > number) {
+                startValue = number;
+                clearInterval(timer);
+              }
+              
+              setCounters(prev => ({
+                ...prev,
+                [key]: startValue
+              }));
+            }, 50);
+            
+            return () => clearInterval(timer);
+          });
+        }
+      },
+      { threshold: 0.5 }
+    );
+    
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+    
+    return () => {
+      if (statsRef.current) {
+        observer.unobserve(statsRef.current);
+      }
+    };
+  }, []);
+
   return (
     <div>
-      {/* Hero Section */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-mainRed via-mainRed/90 to-mainRed/80">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-black/40" />
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: 'url("/images/hero/hero-1.png")',
-            }}
-          />
-        </div>
-
-        <div className="relative z-10 text-center text-textWhite px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-          <h1 className="text-4xl text-mainRed sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-            {t('about.title')}
-          </h1>
-          <p className="text-xl sm:text-2xl text-textWhite/90 max-w-2xl mx-auto leading-relaxed">
-            {t('about.subtitle')}
-          </p>
+      {/* Hero Section - Redesigned with white background */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center max-w-4xl mx-auto"
+          >
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-mainRed">
+              {t('about.title')}
+            </h1>
+            <p className="text-xl sm:text-2xl text-secondaryBlack/80 max-w-2xl mx-auto leading-relaxed">
+              {t('about.subtitle')}
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="section bg-textWhite -mt-16 relative z-10">
-        <div className="container">
-          <div className="bg-textWhite rounded-2xl shadow-2xl p-8 lg:p-12">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center group">
-                  <div className="bg-mainRed/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-mainRed transition-colors duration-300">
-                    <stat.icon className="w-8 h-8 text-mainRed group-hover:text-textWhite" />
-                  </div>
-                  <div className="text-3xl lg:text-4xl font-bold text-secondaryBlack mb-2">
-                    {stat.number}
-                  </div>
-                  <div className="text-secondaryBlack/80 font-medium">
-                    {stat.label}
-                  </div>
+      {/* Stats Section with Background Image */}
+      <section 
+        ref={statsRef}
+        className="relative py-24 bg-cover bg-center bg-fixed"
+        style={{ backgroundImage: 'url("/images/hero/hero-1.png")' }}
+      >
+        <div className="absolute inset-0 bg-secondaryBlack/70"></div>
+        <div className="container relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {stats.map((stat, index) => (
+              <motion.div 
+                key={index} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="text-center group"
+              >
+                <motion.div 
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="bg-mainRed/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-mainRed transition-colors duration-300"
+                >
+                  <stat.icon className="w-10 h-10 text-mainRed group-hover:text-textWhite" />
+                </motion.div>
+                <div className="text-4xl lg:text-5xl font-bold text-textWhite mb-3">
+                  {counters[stat.key]}+
                 </div>
-              ))}
-            </div>
+                <div className="text-textWhite/90 text-xl font-medium">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -89,7 +147,13 @@ export default function About() {
       <section className="section bg-secondaryPlatinium">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="space-y-6"
+            >
               <h2 className="text-3xl lg:text-4xl font-bold text-secondaryBlack">
                 {t('about.history.title')}
               </h2>
@@ -97,37 +161,61 @@ export default function About() {
                 {t('about.history.content')}
               </p>
               <div className="space-y-4">
-                <div className="flex items-start space-x-3">
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="flex items-start space-x-3"
+                >
                   <CheckCircle className="w-6 h-6 text-mainRed mt-1 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold text-secondaryBlack">{t('about.heritage.family')}</h4>
                     <p className="text-secondaryBlack/80">{t('about.heritage.familyDesc')}</p>
                   </div>
-                </div>
-                <div className="flex items-start space-x-3">
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className="flex items-start space-x-3"
+                >
                   <CheckCircle className="w-6 h-6 text-mainRed mt-1 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold text-secondaryBlack">{t('about.heritage.growth')}</h4>
                     <p className="text-secondaryBlack/80">{t('about.heritage.growthDesc')}</p>
                   </div>
-                </div>
-                <div className="flex items-start space-x-3">
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                  className="flex items-start space-x-3"
+                >
                   <CheckCircle className="w-6 h-6 text-mainRed mt-1 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold text-secondaryBlack">{t('about.heritage.leadership')}</h4>
                     <p className="text-secondaryBlack/80">{t('about.heritage.leadershipDesc')}</p>
                   </div>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="relative">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative"
+            >
               <img
                 src="/images/about/history.jpg"
                 alt="SACITIR history"
                 className="rounded-xl shadow-2xl"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -136,29 +224,49 @@ export default function About() {
       <section className="section bg-textWhite">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="card p-8 lg:p-10 h-full">
-              <div className="bg-mainRed/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="card p-8 lg:p-10 h-full"
+            >
+              <motion.div 
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.8 }}
+                className="bg-mainRed/10 w-16 h-16 rounded-full flex items-center justify-center mb-6"
+              >
                 <Award className="w-8 h-8 text-mainRed" />
-              </div>
+              </motion.div>
               <h3 className="text-2xl lg:text-3xl font-bold text-secondaryBlack mb-6">
                 {t('about.mission.title')}
               </h3>
               <p className="text-lg text-secondaryBlack/80 leading-relaxed">
                 {t('about.mission.content')}
               </p>
-            </div>
+            </motion.div>
 
-            <div className="card p-8 lg:p-10 h-full">
-              <div className="bg-mainRed/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="card p-8 lg:p-10 h-full"
+            >
+              <motion.div 
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.8 }}
+                className="bg-mainRed/10 w-16 h-16 rounded-full flex items-center justify-center mb-6"
+              >
                 <Globe className="w-8 h-8 text-mainRed" />
-              </div>
+              </motion.div>
               <h3 className="text-2xl lg:text-3xl font-bold text-secondaryBlack mb-6">
                 {t('about.vision.title')}
               </h3>
               <p className="text-lg text-secondaryBlack/80 leading-relaxed">
                 {t('about.vision.content')}
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -166,28 +274,46 @@ export default function About() {
       {/* Values Section */}
       <section className="section bg-secondaryPlatinium">
         <div className="container">
-          <div className="text-center mb-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
             <h2 className="text-3xl lg:text-4xl font-bold text-secondaryBlack mb-4">
               {t('about.values.title')}
             </h2>
             <p className="text-lg text-secondaryBlack/80 max-w-2xl mx-auto">
               {t('about.values.description')}
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {values.map((value, index) => (
-              <div key={index} className="card p-8 group hover:scale-105 transition-all duration-300">
-                <div className="bg-mainRed/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 group-hover:bg-mainRed transition-colors">
+              <motion.div 
+                key={index} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+                whileHover={{ scale: 1.03 }}
+                className="card p-8 group transition-all duration-300"
+              >
+                <motion.div 
+                  whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                  transition={{ duration: 0.5 }}
+                  className="bg-mainRed/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 group-hover:bg-mainRed transition-colors"
+                >
                   <value.icon className="w-8 h-8 text-mainRed group-hover:text-textWhite" />
-                </div>
+                </motion.div>
                 <h4 className="text-xl font-bold text-secondaryBlack mb-4">
                   {t(value.titleKey)}
                 </h4>
                 <p className="text-secondaryBlack/80 leading-relaxed">
                   {t(value.descriptionKey)}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -195,9 +321,13 @@ export default function About() {
 
       {/* CTA Section */}
       <section className="section bg-mainRed relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20" />
-        
-        <div className="container relative z-10 text-center text-textWhite">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="container relative z-10 text-center text-textWhite"
+        >
           <h2 className="text-3xl lg:text-4xl font-bold mb-6">
             {t('about.cta.title')}
           </h2>
@@ -205,20 +335,30 @@ export default function About() {
             {t('about.cta.description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact"
-              className="btn-secondary"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {t('about.cta.button')}
-            </Link>
-            <Link
-              href="/services"
-              className="btn-secondary"
+              <Link
+                href="/contact"
+                className="btn-secondary"
+              >
+                {t('about.cta.button')}
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {t('about.cta.learnMore')}
-            </Link>
+              <Link
+                href="/services"
+                className="btn-secondary"
+              >
+                {t('about.cta.learnMore')}
+              </Link>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );
