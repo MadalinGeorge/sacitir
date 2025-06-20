@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Parallax } from 'react-scroll-parallax';
 import { useLocale } from '@/context/LocaleContext';
 import { ArrowRight, CheckCircle, Truck, Snowflake, Package } from 'lucide-react';
 import Link from 'next/link';
+import * as motion from 'motion/react-client';
 
 export default function Home() {
   const { t } = useLocale();
@@ -12,6 +12,13 @@ export default function Home() {
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
+    
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
@@ -19,18 +26,45 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-screen min-h-[500px] flex items-center">
         <div className="absolute inset-0 bg-gradient-to-r from-secondaryBlack/60 to-secondaryBlack/50 z-10"></div>
-        <div className="absolute inset-0 bg-[url('/images/home/home-1.png')] bg-cover bg-center"></div>
+        <motion.div 
+          initial={{ scale: 1.1, opacity: 0.8 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="absolute inset-0 bg-[url('/images/home/home-1.png')] bg-cover bg-center"
+        ></motion.div>
 
         <div className="container relative z-20 text-textWhite mt-12 md:mt-24">
           <div className="max-w-3xl">
-            <Parallax speed={-5} className="md:block" disabled={isMobile}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
               <h1 className="text-4xl text-mainRed md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight">
                 {t('home.hero.title')}
               </h1>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+            >
               <p className="text-xl md:text-2xl text-textWhite/90 mb-8 md:mb-10 leading-relaxed">
                 {t('home.hero.subtitle')}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Link
                   href="/contact"
                   className="btn-primary inline-flex"
@@ -38,14 +72,19 @@ export default function Home() {
                   {t('home.hero.cta')}
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Link
                   href="/about"
                   className="btn-primary inline-flex"
                 >
                   {t('home.hero.learnMore')}
                 </Link>
-              </div>
-            </Parallax>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -54,7 +93,13 @@ export default function Home() {
       <section className="py-20 bg-secondaryPlatinium">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 grid-gap items-center">
-            <div className="space-y-8 mb-12 lg:mb-0">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="space-y-8 mb-12 lg:mb-0"
+            >
               <h2 className="text-3xl lg:text-4xl font-bold text-secondaryBlack">
                 {t('home.about.title')}
               </h2>
@@ -62,30 +107,52 @@ export default function Home() {
                 {t('home.about.description')}
               </p>
               <div className="space-y-4">
-                <div className="flex items-center space-x-2 text-mainRed">
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="flex items-center space-x-2 text-mainRed"
+                >
                   <CheckCircle className="w-5 h-5" />
                   <span className="font-medium">{t('home.about.experience')}</span>
-                </div>
-                <div className="flex items-center space-x-2 text-mainRed">
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className="flex items-center space-x-2 text-mainRed"
+                >
                   <CheckCircle className="w-5 h-5" />
                   <span className="font-medium">{t('home.about.coverage')}</span>
-                </div>
-                <div className="flex items-center space-x-2 text-mainRed">
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                  className="flex items-center space-x-2 text-mainRed"
+                >
                   <CheckCircle className="w-5 h-5" />
                   <span className="font-medium">{t('home.about.support')}</span>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
 
-            <Parallax translateX={[20, 0]} opacity={[0.80, 1]}>
-              <div className="relative">
-                <img
-                  src="/images/home/home-1.png"
-                  alt="SACITIR trucks"
-                  className="rounded-xl shadow-2xl"
-                />
-              </div>
-            </Parallax>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="relative"
+            >
+              <img
+                src="/images/home/home-1.png"
+                alt="SACITIR trucks"
+                className="rounded-xl shadow-2xl"
+              />
+            </motion.div>
           </div>
         </div>
       </section>
@@ -93,7 +160,13 @@ export default function Home() {
       {/* Services Section */}
       <section className="py-20 bg-secondaryPlatinium">
         <div className="container">
-          <div className="text-center mb-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-8"
+          >
             <h2 className="text-3xl lg:text-4xl font-bold text-secondaryBlack mb-6">
               {t('home.services.title')}
             </h2>
@@ -105,69 +178,91 @@ export default function Home() {
               <ArrowRight className="w-4 h-4 ml-1" />
               <span className="absolute -bottom-1 left-0 right-0 w-0 h-0.5 bg-mainRed transition-all duration-300 group-hover:w-full mx-auto" />
             </Link>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* National Transport */}
-              <div className="card p-8 text-center group hover:scale-105 transition-all duration-300">
-                <div className="bg-mainRed/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-mainRed transition-colors">
-                  <Truck className="w-8 h-8 text-mainRed group-hover:text-textWhite" />
-                </div>
-                <h3 className="text-xl font-bold text-secondaryBlack mb-4">
-                  {t('home.services.national.title')}
-                </h3>
-                <p className="text-secondaryBlack/80">
-                  {t('home.services.national.description')}
-                </p>
-              </div>
+            <ServiceCard 
+              icon={Truck}
+              title={t('home.services.national.title')}
+              description={t('home.services.national.description')}
+              delay={0}
+            />
 
             {/* Refrigerated Transport */}
-              <div className="card p-8 text-center group hover:scale-105 transition-all duration-300">
-                <div className="bg-mainRed/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-mainRed transition-colors">
-                  <Snowflake className="w-8 h-8 text-mainRed group-hover:text-textWhite" />
-                </div>
-                <h3 className="text-xl font-bold text-secondaryBlack mb-4">
-                  {t('home.services.refrigerated.title')}
-                </h3>
-                <p className="text-secondaryBlack/80">
-                  {t('home.services.refrigerated.description')}
-                </p>
-              </div>
+            <ServiceCard 
+              icon={Snowflake}
+              title={t('home.services.refrigerated.title')}
+              description={t('home.services.refrigerated.description')}
+              delay={1}
+            />
 
             {/* Logistics Solutions */}
-              <div className="card p-8 text-center group hover:scale-105 transition-all duration-300">
-                <div className="bg-mainRed/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-mainRed transition-colors">
-                  <Package className="w-8 h-8 text-mainRed group-hover:text-textWhite" />
-                </div>
-                <h3 className="text-xl font-bold text-secondaryBlack mb-4">
-                  {t('home.services.logistics.title')}
-                </h3>
-                <p className="text-secondaryBlack/80">
-                  {t('home.services.logistics.description')}
-                </p>
-              </div>
+            <ServiceCard 
+              icon={Package}
+              title={t('home.services.logistics.title')}
+              description={t('home.services.logistics.description')}
+              delay={2}
+            />
           </div>
-
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-mainRed">
-        <div className="container relative z-10 text-center text-textWhite">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="container relative z-10 text-center text-textWhite"
+        >
           <h2 className="text-3xl lg:text-4xl font-bold mb-8">
             {t('home.cta.title')}
           </h2>
           <p className="text-xl mb-10 text-textWhite/90 max-w-2xl mx-auto">
             {t('home.cta.description')}
           </p>
-          <Link
-            href="/contact"
-            className="btn-secondary inline-flex items-center"
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            {t('home.cta.button')}
-          </Link>
-        </div>
+            <Link
+              href="/contact"
+              className="btn-secondary inline-flex items-center"
+            >
+              {t('home.cta.button')}
+            </Link>
+          </motion.div>
+        </motion.div>
       </section>
     </div>
+  );
+}
+
+// Service Card Component
+function ServiceCard({ icon: Icon, title, description, delay = 0 }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6, delay: delay * 0.2 }}
+      className="card p-8 text-center group hover:scale-105 transition-all duration-300"
+    >
+      <motion.div 
+        className="bg-mainRed/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-mainRed transition-colors"
+        whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+        transition={{ duration: 0.5 }}
+      >
+        <Icon className="w-8 h-8 text-mainRed group-hover:text-textWhite" />
+      </motion.div>
+      <h3 className="text-xl font-bold text-secondaryBlack mb-4">
+        {title}
+      </h3>
+      <p className="text-secondaryBlack/80">
+        {description}
+      </p>
+    </motion.div>
   );
 }
