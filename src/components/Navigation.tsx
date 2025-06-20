@@ -7,6 +7,7 @@ import { useLocale } from '@/context/LocaleContext';
 import { Menu, X, Globe } from 'lucide-react';
 import AnimatedMobileNav from './AnimatedMobileNav';
 import { getImagePath } from '@/lib/utils';
+import { motion } from 'framer-motion';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -86,16 +87,32 @@ const Navigation = () => {
               </button>
 
               {/* Mobile Menu Button */}
-              <button
+              <motion.button
                 onClick={toggleMenu}
-                className="lg:hidden p-2 rounded-lg bg-secondaryPlatinium hover:bg-secondaryPlatinium/80 transition-colors"
+                className="lg:hidden p-2 rounded-lg bg-secondaryPlatinium hover:bg-secondaryPlatinium/80 transition-colors z-50 relative flex items-center justify-center w-9 h-9"
+                animate={isMenuOpen ? "open" : "closed"}
               >
-                {isMenuOpen ? (
-                  <X className="w-5 h-5 text-secondaryBlack" />
-                ) : (
+                <motion.div
+                  className="absolute"
+                  variants={{
+                    closed: { rotate: 0, opacity: 1 },
+                    open: { rotate: 45, opacity: 0 },
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
                   <Menu className="w-5 h-5 text-secondaryBlack" />
-                )}
-              </button>
+                </motion.div>
+                <motion.div
+                  className="absolute"
+                  variants={{
+                    closed: { rotate: -45, opacity: 0 },
+                    open: { rotate: 0, opacity: 1 },
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <X className="w-5 h-5 text-secondaryBlack" />
+                </motion.div>
+              </motion.button>
             </div>
           </div>
         </div>
