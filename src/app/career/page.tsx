@@ -22,7 +22,6 @@ export default function Career() {
   const { t } = useLocale();
   const [jobs, setJobs] = useState<JobOffer[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedJob, setSelectedJob] = useState<JobOffer | null>(null);
   const [showApplicationForm, setShowApplicationForm] = useState(false);
   const [applicationData, setApplicationData] = useState({
     name: '',
@@ -32,11 +31,6 @@ export default function Career() {
     message: ''
   });
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   // Simulate fetching jobs from Google Sheets API
   useEffect(() => {
@@ -69,13 +63,13 @@ export default function Career() {
             type: 'Full-time',
             salary: '$45,000 - $55,000',
             description: 'Coordinate shipments and manage logistics operations.',
-            requirements: ['Bachelor\'s degree preferred', 'Experience in logistics', 'Strong communication skills'],
+            requirements: ['Bachelor&apos;s degree preferred', 'Experience in logistics', 'Strong communication skills'],
             posted: '2024-01-10'
           }
         ];
         setJobs(mockJobs);
-      } catch (error) {
-        console.error('Error fetching jobs:', error);
+      } catch {
+        console.error('Error fetching jobs');
       } finally {
         setLoading(false);
       }
@@ -85,7 +79,6 @@ export default function Career() {
   }, []);
 
   const handleApply = (job: JobOffer) => {
-    setSelectedJob(job);
     setApplicationData(prev => ({ ...prev, position: job.title }));
     setShowApplicationForm(true);
   };
@@ -103,7 +96,7 @@ export default function Career() {
         setSubmitStatus('idle');
         setApplicationData({ name: '', email: '', phone: '', position: '', message: '' });
       }, 2000);
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
     }
   };
@@ -381,7 +374,7 @@ export default function Career() {
                     {t('career.applicationForm.success')}
                   </h4>
                   <p className="text-secondaryBlack">
-                    We'll be in touch soon!
+                    We&apos;ll be in touch soon!
                   </p>
                 </motion.div>
               ) : (

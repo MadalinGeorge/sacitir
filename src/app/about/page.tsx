@@ -1,14 +1,19 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import { useLocale } from '@/context/LocaleContext';
-import { CheckCircle, Users, Award, Globe, Truck, Shield, Clock, Heart } from 'lucide-react';
+import { CheckCircle, Award, Globe, Truck, Shield, Clock, Heart } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import * as motion from 'motion/react-client';
 
 export default function About() {
   const { t } = useLocale();
-  const [counters, setCounters] = React.useState({
+  const [counters, setCounters] = React.useState<{
+    fleet: number;
+    cities: number;
+    years: number;
+  }>({
     fleet: 0,
     cities: 0,
     years: 0
@@ -16,11 +21,11 @@ export default function About() {
   
   const statsRef = useRef(null);
 
-  const stats = [
-    { icon: Truck, number: 20, label: 'Fleet Vehicles', key: 'fleet' },
-    { icon: Globe, number: 50, label: 'Cities Served', key: 'cities' },
-    { icon: Award, number: 10, label: 'Years Experience', key: 'years' },
-  ];
+  const stats = useMemo(() => [
+    { icon: Truck, number: 20, label: 'Fleet Vehicles', key: 'fleet' as const },
+    { icon: Globe, number: 50, label: 'Cities Served', key: 'cities' as const },
+    { icon: Award, number: 10, label: 'Years Experience', key: 'years' as const },
+  ], []);
 
   const values = [
     {
@@ -75,16 +80,17 @@ export default function About() {
       { threshold: 0.5 }
     );
     
-    if (statsRef.current) {
-      observer.observe(statsRef.current);
+    const currentRef = statsRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
     
     return () => {
-      if (statsRef.current) {
-        observer.unobserve(statsRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
-  }, []);
+  }, [stats]);
 
   return (
     <div>
@@ -210,9 +216,11 @@ export default function About() {
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              <img
+              <Image
                 src="/images/about/history.jpg"
                 alt="SACITIR history"
+                width={600}
+                height={400}
                 className="rounded-xl shadow-2xl"
               />
             </motion.div>

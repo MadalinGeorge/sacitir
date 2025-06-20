@@ -4,10 +4,16 @@ import React from 'react';
 import { useLocale } from '@/context/LocaleContext';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import * as motion from 'motion/react-client';
 
 export default function Services() {
   const { t } = useLocale();
+
+  const getTranslation = (key: string): string => {
+    const translation = t(key);
+    return Array.isArray(translation) ? translation[0] : translation;
+  };
 
   const services = [
     {
@@ -128,9 +134,11 @@ export default function Services() {
                   transition={{ duration: 0.8 }}
                   className={`relative ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}
                 >
-                  <img
+                  <Image
                     src={service.image}
-                    alt={t(`services.${service.key}.title`)}
+                    alt={getTranslation(`services.${service.key}.title`)}
+                    width={600}
+                    height={400}
                     className="rounded-xl shadow-2xl w-full h-80 lg:h-96 object-cover"
                   />
                 </motion.div>

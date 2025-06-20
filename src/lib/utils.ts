@@ -90,9 +90,9 @@ export async function fetchJobsFromGoogleSheets(): Promise<Job[]> {
       postedDate: row[5] || new Date().toISOString(),
     }));
 
-    return jobs.filter(job => job.title && job.description);
-  } catch (error) {
-    console.error('Error fetching jobs from Google Sheets:', error);
+    return jobs.filter((job: Job) => job.title && job.description);
+  } catch {
+    console.error('Error fetching jobs from Google Sheets');
     return [];
   }
 }
@@ -106,7 +106,7 @@ export function formatDate(dateString: string, locale: string = 'en'): string {
       month: 'long',
       day: 'numeric',
     });
-  } catch (error) {
+  } catch {
     return dateString;
   }
 }

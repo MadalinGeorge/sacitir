@@ -1,25 +1,14 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useLocale } from '@/context/LocaleContext';
 import { ArrowRight, CheckCircle, Truck, Snowflake, Package } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import * as motion from 'motion/react-client';
 
 export default function Home() {
   const { t } = useLocale();
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-    
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
     <div className="bg-white">
@@ -147,9 +136,11 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              <img
+              <Image
                 src="/images/home/home-1.png"
                 alt="SACITIR trucks"
+                width={600}
+                height={400}
                 className="rounded-xl shadow-2xl"
               />
             </motion.div>
@@ -241,7 +232,14 @@ export default function Home() {
 }
 
 // Service Card Component
-function ServiceCard({ icon: Icon, title, description, delay = 0 }) {
+interface ServiceCardProps {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string | string[];
+  description: string | string[];
+  delay?: number;
+}
+
+function ServiceCard({ icon: Icon, title, description, delay = 0 }: ServiceCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -258,10 +256,10 @@ function ServiceCard({ icon: Icon, title, description, delay = 0 }) {
         <Icon className="w-8 h-8 text-mainRed group-hover:text-textWhite" />
       </motion.div>
       <h3 className="text-xl font-bold text-secondaryBlack mb-4">
-        {title}
+        {Array.isArray(title) ? title[0] : title}
       </h3>
       <p className="text-secondaryBlack/80">
-        {description}
+        {Array.isArray(description) ? description[0] : description}
       </p>
     </motion.div>
   );

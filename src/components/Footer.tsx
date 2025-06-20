@@ -4,11 +4,16 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLocale } from '@/context/LocaleContext';
-import { Truck, Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 
 const Footer = () => {
   const { t } = useLocale();
   const [year, setYear] = useState<number | null>(null);
+
+  const getTranslation = (key: string): string => {
+    const translation = t(key);
+    return Array.isArray(translation) ? translation[0] : translation;
+  };
 
   useEffect(() => {
     setYear(new Date().getFullYear());
@@ -118,7 +123,7 @@ const Footer = () => {
             <form className="space-y-3">
               <input
                 type="email"
-                placeholder={t('footer.newsletter.placeholder')}
+                placeholder={getTranslation('footer.newsletter.placeholder')}
                 className="w-full px-4 py-2 bg-secondaryBlack/50 border border-textWhite/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-mainRed text-textWhite"
               />
               <button

@@ -1,17 +1,20 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLocale } from '@/context/LocaleContext';
 import { Menu, X, Globe } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import AnimatedMobileNav from './AnimatedMobileNav';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const { locale, setLocale, t } = useLocale();
+
+  const getTranslation = (key: string): string => {
+    const translation = t(key);
+    return Array.isArray(translation) ? translation[0] : translation;
+  };
 
   const navItems = [
     { key: 'nav.home', href: '/' },
@@ -20,10 +23,6 @@ const Navigation = () => {
     { key: 'nav.career', href: '/career' },
     { key: 'nav.contact', href: '/contact' },
   ];
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const toggleLanguage = () => {
     setLocale(locale === 'en' ? 'es' : 'en');
@@ -72,7 +71,7 @@ const Navigation = () => {
               <button
                 onClick={toggleLanguage}
                 className="flex items-center space-x-1 px-3 py-2 text-secondaryBlack hover:text-mainRed transition-colors"
-                title={t('nav.language')}
+                title={getTranslation('nav.language')}
               >
                 <Globe className="w-4 h-4" />
                 <span className="text-sm font-medium uppercase">{locale}</span>

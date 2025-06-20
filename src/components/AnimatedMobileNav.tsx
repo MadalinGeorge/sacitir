@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { useLocale } from '@/context/LocaleContext'
 import * as motion from 'motion/react-client'
@@ -16,7 +16,7 @@ interface AnimatedMobileNavProps {
 export default function AnimatedMobileNav({ isOpen, toggleMenu, navItems }: AnimatedMobileNavProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const { height } = useDimensions(containerRef)
-  const { t, locale, setLocale } = useLocale()
+  const { locale, setLocale } = useLocale()
 
   const toggleLanguage = () => {
     setLocale(locale === 'en' ? 'es' : 'en')
@@ -74,12 +74,10 @@ const languageVariants = {
 }
 
 const Navigation = ({ navItems, toggleMenu }: { navItems: { key: string; href: string }[], toggleMenu: () => void }) => {
-  const { t } = useLocale()
-  
   return (
     <motion.ul className="flex flex-col space-y-4 pt-24 px-8" variants={navVariants}>
-      {navItems.map((item, i) => (
-        <MenuItem key={item.key} i={i} item={item} toggleMenu={toggleMenu} />
+      {navItems.map((item) => (
+        <MenuItem key={item.key} i={0} item={item} toggleMenu={toggleMenu} />
       ))}
     </motion.ul>
   )
@@ -102,7 +100,7 @@ const itemVariants = {
   }
 }
 
-const MenuItem = ({ i, item, toggleMenu }: { i: number, item: { key: string; href: string }, toggleMenu: () => void }) => {
+const MenuItem = ({ item, toggleMenu }: { i: number, item: { key: string; href: string }, toggleMenu: () => void }) => {
   const { t } = useLocale()
   
   return (
@@ -128,7 +126,7 @@ const sidebarVariants = {
   open: (height = 1000) => ({
     clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 20,
       restDelta: 2
     }
@@ -137,7 +135,7 @@ const sidebarVariants = {
     clipPath: "circle(30px at 40px 40px)",
     transition: {
       delay: 0.2,
-      type: "spring",
+      type: "spring" as const,
       stiffness: 400,
       damping: 40
     }

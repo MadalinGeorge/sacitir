@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import en from '@/locales/en';
 import es from '@/locales/es';
 
-type TranslationType = Record<string, any>;
+type TranslationType = Record<string, unknown>;
 type Locale = 'en' | 'es';
 
 interface LocaleContextType {
@@ -42,11 +42,11 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   // Improved translation function that handles nested keys and arrays
   const t = (key: string): string | string[] => {
     const keys = key.split('.');
-    let result: any = translations[locale];
+    let result: unknown = translations[locale];
     
     for (const k of keys) {
-      if (result === undefined) return key;
-      result = result[k];
+      if (result === undefined || typeof result !== 'object' || result === null) return key;
+      result = (result as Record<string, unknown>)[k];
     }
     
     // If result is undefined, return the key as fallback
