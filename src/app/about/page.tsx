@@ -18,6 +18,7 @@ export default function About() {
     cities: 0,
     years: 0
   });
+  const [mounted, setMounted] = React.useState(false);
   
   const statsRef = useRef(null);
 
@@ -49,6 +50,10 @@ export default function About() {
       descriptionKey: 'about.values.sustainability.description'
     },
   ];
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Counter animation effect
   useEffect(() => {
@@ -138,7 +143,7 @@ export default function About() {
                   <stat.icon className="w-10 h-10 text-mainRed group-hover:text-textWhite" />
                 </motion.div>
                 <div className="text-4xl lg:text-5xl font-bold text-textWhite mb-3">
-                  {counters[stat.key]}+
+                  {mounted ? counters[stat.key] : 0}+
                 </div>
                 <div className="text-textWhite/90 text-xl font-medium">
                   {stat.label}
@@ -155,8 +160,7 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               className="space-y-6"
             >

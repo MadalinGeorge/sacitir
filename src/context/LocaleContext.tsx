@@ -27,6 +27,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     setMounted(true);
+    // Only read localStorage after component is mounted to prevent hydration mismatch
     const savedLocale = localStorage.getItem('locale') as Locale | null;
     if (savedLocale && (savedLocale === 'en' || savedLocale === 'es')) {
       setLocale(savedLocale);
@@ -39,10 +40,13 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     }
   }, [locale, mounted]);
 
+  // Use the mounted state to ensure consistent rendering
+  const currentLocale = mounted ? locale : 'es';
+
   // Improved translation function that handles nested keys and arrays
   const t = (key: string): string | string[] => {
     const keys = key.split('.');
-    let result: unknown = translations[locale];
+    let result: unknown = translations[currentLocale];
     
     for (const k of keys) {
       if (result === undefined || typeof result !== 'object' || result === null) return key;
@@ -66,7 +70,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <LocaleContext.Provider value={{ locale, setLocale, t }}>
+    <LocaleContext.Provider value={{ locale: currentLocale, setLocale, t }}>
       {children}
     </LocaleContext.Provider>
   );

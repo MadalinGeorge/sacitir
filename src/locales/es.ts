@@ -197,9 +197,8 @@ const es = {
       weekend: 'Sábado-Domingo',
       closed: 'Cerrado'
     },
-    getInTouch: {
-      title: 'Ponte en Contacto',
-      description: '¿Listo para enviar tu carga? Contacta con nuestro experimentado equipo para soluciones logísticas personalizadas y cotizaciones competitivas.'
+    location: {
+      title: 'Nuestra Ubicación',
     }
   },
   common: {

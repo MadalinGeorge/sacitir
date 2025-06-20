@@ -197,10 +197,6 @@ const en = {
       weekend: 'Saturday-Sunday',
       closed: 'Closed'
     },
-    getInTouch: {
-      title: 'Get in Touch',
-      description: 'Ready to ship your cargo? Contact our experienced team for personalized logistics solutions and competitive quotes.'
-    },
     location: {
       title: 'Our Location',
       description: 'Visit our headquarters or find us on the map',

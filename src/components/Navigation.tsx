@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLocale } from '@/context/LocaleContext';
@@ -9,7 +9,12 @@ import AnimatedMobileNav from './AnimatedMobileNav';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { locale, setLocale, t } = useLocale();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const getTranslation = (key: string): string => {
     const translation = t(key);
@@ -74,7 +79,9 @@ const Navigation = () => {
                 title={getTranslation('nav.language')}
               >
                 <Globe className="w-4 h-4" />
-                <span className="text-sm font-medium uppercase">{locale}</span>
+                <span className="text-sm font-medium uppercase">
+                  {mounted ? locale : 'es'}
+                </span>
               </button>
 
               {/* Mobile Menu Button */}

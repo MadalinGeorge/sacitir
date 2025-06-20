@@ -2,7 +2,7 @@
   "name": "sacitir-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://[your-username].github.io/sacitir",
+  "homepage": "https://madalingeorge.github.io/sacitir",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",

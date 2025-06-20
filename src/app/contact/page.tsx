@@ -6,6 +6,11 @@ import { Mail, Phone, MapPin, Clock, Send, CheckCircle, AlertCircle } from 'luci
 import emailjs from '@emailjs/browser';
 import * as motion from 'motion/react-client';
 
+const getTranslation = (t: (key: string) => string | string[], key: string): string => {
+  const translation = t(key);
+  return Array.isArray(translation) ? translation[0] : translation;
+};
+
 export default function Contact() {
   const { t } = useLocale();
   const formRef = useRef<HTMLFormElement>(null);
@@ -85,8 +90,8 @@ export default function Contact() {
             className="lg:col-span-1 space-y-8"
           >
             <div className="card">
-              <h2 className="text-xl font-bold mb-6">{t('contact.getInTouch.title')}</h2>
-              <p className="text-secondaryBlack/80 mb-6">{t('contact.getInTouch.description')}</p>
+              <h2 className="text-xl font-bold mb-6">{t('contact.getInTouch')}</h2>
+              <p className="text-secondaryBlack/80 mb-6">Ready to ship your cargo? Contact our experienced team for personalized logistics solutions and competitive quotes.</p>
               
               <div className="space-y-6">
                 <motion.div 
@@ -187,7 +192,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       className="form-input"
-                      placeholder={t('contact.form.namePlaceholder')}
+                      placeholder={getTranslation(t, 'contact.form.namePlaceholder')}
                       required
                     />
                   </motion.div>
@@ -204,7 +209,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       className="form-input"
-                      placeholder={t('contact.form.emailPlaceholder')}
+                      placeholder={getTranslation(t, 'contact.form.emailPlaceholder')}
                       required
                     />
                   </motion.div>
@@ -222,7 +227,7 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     className="form-input"
-                    placeholder={t('contact.form.subjectPlaceholder')}
+                    placeholder={getTranslation(t, 'contact.form.subjectPlaceholder')}
                     required
                   />
                 </motion.div>
@@ -239,7 +244,7 @@ export default function Contact() {
                     onChange={handleChange}
                     className="form-input"
                     rows={4}
-                    placeholder={t('contact.form.messagePlaceholder')}
+                    placeholder={getTranslation(t, 'contact.form.messagePlaceholder')}
                     required
                   />
                 </motion.div>

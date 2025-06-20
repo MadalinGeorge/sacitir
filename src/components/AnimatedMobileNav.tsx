@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useLocale } from '@/context/LocaleContext'
 import * as motion from 'motion/react-client'
@@ -17,6 +17,11 @@ export default function AnimatedMobileNav({ isOpen, toggleMenu, navItems }: Anim
   const containerRef = useRef<HTMLDivElement>(null)
   const { height } = useDimensions(containerRef)
   const { locale, setLocale } = useLocale()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const toggleLanguage = () => {
     setLocale(locale === 'en' ? 'es' : 'en')
@@ -46,7 +51,9 @@ export default function AnimatedMobileNav({ isOpen, toggleMenu, navItems }: Anim
         variants={languageVariants}
       >
         <Globe className="w-4 h-4" />
-        <span className="text-sm font-medium uppercase">{locale}</span>
+        <span className="text-sm font-medium uppercase">
+          {mounted ? locale : 'es'}
+        </span>
       </motion.button>
     </motion.nav>
   )
