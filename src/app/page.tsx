@@ -5,7 +5,7 @@ import { useLocale } from '@/context/LocaleContext';
 import { ArrowRight, CheckCircle, Truck, Snowflake, Package } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import * as motion from 'motion/react-client';
+import { motion } from 'framer-motion';
 import { getImagePath } from '@/lib/utils';
 
 export default function Home() {

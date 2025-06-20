@@ -6,8 +6,8 @@ import Image from 'next/image';
 import { useLocale } from '@/context/LocaleContext';
 import { Menu, X, Globe } from 'lucide-react';
 import AnimatedMobileNav from './AnimatedMobileNav';
-import { getImagePath } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import { getImagePath } from '@/lib/utils';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

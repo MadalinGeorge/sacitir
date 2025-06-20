@@ -5,7 +5,7 @@ import { useLocale } from '@/context/LocaleContext';
 import { CheckCircle, Award, Globe, Truck, Shield, Clock, Heart } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import * as motion from 'motion/react-client';
+import { motion } from 'framer-motion';
 import { getImagePath } from '@/lib/utils';
 
 export default function About() {

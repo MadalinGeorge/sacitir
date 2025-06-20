@@ -4,7 +4,6 @@ import React from 'react'
 import Link from 'next/link'
 import { useLocale } from '@/context/LocaleContext'
 import { motion, Variants } from 'framer-motion'
-import { Globe } from 'lucide-react'
 
 interface AnimatedMobileNavProps {
   isOpen: boolean
