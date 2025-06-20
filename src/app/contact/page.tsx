@@ -2,8 +2,9 @@
 
 import React, { useState, useRef } from 'react';
 import { useLocale } from '@/context/LocaleContext';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle, MessageSquare, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import * as motion from 'motion/react-client';
 
 export default function Contact() {
   const { t } = useLocale();
@@ -63,82 +64,122 @@ export default function Contact() {
     <div className="pt-24 pb-16 md:pt-32 md:pb-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
-        <div className="text-center mb-12 md:mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12 md:mb-16"
+        >
           <h1 className="text-3xl text-mainRed md:text-4xl lg:text-5xl font-bold mb-4">{t('contact.title')}</h1>
           <p className="text-lg text-secondaryBlack/80 max-w-2xl mx-auto">
             {t('contact.subtitle')}
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* Contact Information */}
-          <div className="lg:col-span-1 space-y-8">
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:col-span-1 space-y-8"
+          >
             <div className="card">
-              <h2 className="text-xl font-bold mb-6">{t('contact.getInTouch')}</h2>
+              <h2 className="text-xl font-bold mb-6">{t('contact.getInTouch.title')}</h2>
+              <p className="text-secondaryBlack/80 mb-6">{t('contact.getInTouch.description')}</p>
               
               <div className="space-y-6">
-                <div className="flex items-start space-x-4">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="flex items-start space-x-4"
+                >
                   <div className="bg-mainRed/10 p-3 rounded-lg">
                     <Mail className="w-5 h-5 text-mainRed" />
                   </div>
                   <div>
-                    <h3 className="font-medium">{t('contact.email')}</h3>
+                    <h3 className="font-medium">{t('contact.info.email')}</h3>
                     <a href="mailto:info@sacitir.com" className="text-mainRed hover:underline">
                       info@sacitir.com
                     </a>
                   </div>
-                </div>
+                </motion.div>
                 
-                <div className="flex items-start space-x-4">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className="flex items-start space-x-4"
+                >
                   <div className="bg-mainRed/10 p-3 rounded-lg">
                     <Phone className="w-5 h-5 text-mainRed" />
                   </div>
                   <div>
-                    <h3 className="font-medium">{t('contact.phone')}</h3>
+                    <h3 className="font-medium">{t('contact.info.phone')}</h3>
                     <a href="tel:+34911234567" className="text-mainRed hover:underline">
                       +34 91 123 4567
                     </a>
                   </div>
-                </div>
+                </motion.div>
                 
-                <div className="flex items-start space-x-4">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  className="flex items-start space-x-4"
+                >
                   <div className="bg-mainRed/10 p-3 rounded-lg">
                     <MapPin className="w-5 h-5 text-mainRed" />
                   </div>
                   <div>
-                    <h3 className="font-medium">{t('contact.address')}</h3>
+                    <h3 className="font-medium">{t('contact.info.address')}</h3>
                     <p className="text-secondaryBlack/80">
                       Calle Ejemplo 123<br />
                       28001 Madrid, España
                     </p>
                   </div>
-                </div>
+                </motion.div>
                 
-                <div className="flex items-start space-x-4">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                  className="flex items-start space-x-4"
+                >
                   <div className="bg-mainRed/10 p-3 rounded-lg">
                     <Clock className="w-5 h-5 text-mainRed" />
                   </div>
                   <div>
-                    <h3 className="font-medium">{t('contact.hours')}</h3>
+                    <h3 className="font-medium">{t('contact.info.hours')}</h3>
                     <p className="text-secondaryBlack/80">
-                      {t('contact.weekdays')}: 9:00 - 18:00<br />
-                      {t('contact.weekend')}: {t('contact.closed')}
+                      {t('contact.info.weekdays')}: 9:00 - 18:00<br />
+                      {t('contact.info.weekend')}: {t('contact.info.closed')}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Contact Form */}
-          <div className="lg:col-span-2">
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="lg:col-span-2"
+          >
             <div className="card">
-              <h2 className="text-xl font-bold mb-6">{t('contact.sendMessage')}</h2>
+              <h2 className="text-xl font-bold mb-6">{t('contact.form.title')}</h2>
               
               <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="form-label">{t('contact.name')}</label>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                  >
+                    <label htmlFor="name" className="form-label">{t('contact.form.name')}</label>
                     <input
                       type="text"
                       id="name"
@@ -147,10 +188,15 @@ export default function Contact() {
                       onChange={handleChange}
                       className="form-input"
                       placeholder={t('contact.form.namePlaceholder')}
+                      required
                     />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="form-label">{t('contact.email')}</label>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                  >
+                    <label htmlFor="email" className="form-label">{t('contact.form.email')}</label>
                     <input
                       type="email"
                       id="email"
@@ -159,11 +205,16 @@ export default function Contact() {
                       onChange={handleChange}
                       className="form-input"
                       placeholder={t('contact.form.emailPlaceholder')}
+                      required
                     />
-                  </div>
+                  </motion.div>
                 </div>
-                <div>
-                  <label htmlFor="subject" className="form-label">{t('contact.subject')}</label>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.7 }}
+                >
+                  <label htmlFor="subject" className="form-label">{t('contact.form.subject')}</label>
                   <input
                     type="text"
                     id="subject"
@@ -172,10 +223,15 @@ export default function Contact() {
                     onChange={handleChange}
                     className="form-input"
                     placeholder={t('contact.form.subjectPlaceholder')}
+                    required
                   />
-                </div>
-                <div>
-                  <label htmlFor="message" className="form-label">{t('contact.message')}</label>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.8 }}
+                >
+                  <label htmlFor="message" className="form-label">{t('contact.form.message')}</label>
                   <textarea
                     id="message"
                     name="message"
@@ -184,9 +240,12 @@ export default function Contact() {
                     className="form-input"
                     rows={4}
                     placeholder={t('contact.form.messagePlaceholder')}
+                    required
                   />
-                </div>
-                <button
+                </motion.div>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   type="submit"
                   disabled={submitStatus === 'loading'}
                   className="w-full btn-primary-white-bg disabled:cursor-not-allowed inline-flex items-center justify-center py-4"
@@ -202,9 +261,32 @@ export default function Contact() {
                       <Send className="w-5 h-5 ml-2" />
                     </>
                   )}
-                </button>
+                </motion.button>
+                {submitStatus === 'success' && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex items-center p-4 bg-green-50 border border-green-200 rounded-lg"
+                  >
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                    <div>
+                      <p className="text-green-700 font-medium">
+                        {t('contact.form.success')}
+                      </p>
+                      <p className="text-green-600 text-sm mt-1">
+                        {t('contact.form.successMessage')}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
                 {submitStatus === 'error' && (
-                  <div className="flex items-center p-4 bg-mainRed/10 border border-mainRed/20 rounded-lg">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex items-center p-4 bg-mainRed/10 border border-mainRed/20 rounded-lg"
+                  >
                     <AlertCircle className="w-5 h-5 text-mainRed mr-3 flex-shrink-0" />
                     <div>
                       <p className="text-mainRed font-medium">
@@ -214,11 +296,11 @@ export default function Contact() {
                         {t('contact.form.errorMessage')}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
               </form>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

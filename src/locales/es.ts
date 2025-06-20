@@ -168,6 +168,9 @@ const es = {
   contact: {
     title: 'Contáctanos',
     subtitle: 'Ponte en contacto con nuestro equipo',
+    getInTouch: 'Ponte en Contacto',
+    sendMessage: 'Envíanos un Mensaje',
+    findUs: 'Encuéntranos',
     form: {
       title: 'Envíanos un Mensaje',
       name: 'Nombre',
@@ -177,7 +180,7 @@ const es = {
       namePlaceholder: 'Tu nombre completo',
       emailPlaceholder: 'tu.email@ejemplo.com',
       subjectPlaceholder: '¿Cómo podemos ayudarte?',
-      messagePlaceholder: 'Cuéntanos sobre tus necesidades de transporte de carga...',
+      messagePlaceholder: 'Cuéntanos sobre tus necesidades de transporte...',
       submit: 'Enviar Mensaje',
       sending: 'Enviando...',
       success: '¡Mensaje enviado exitosamente!',
@@ -193,10 +196,43 @@ const es = {
       weekdays: 'Lunes-Viernes',
       weekend: 'Sábado-Domingo',
       closed: 'Cerrado'
+    },
+    getInTouch: {
+      title: 'Ponte en Contacto',
+      description: '¿Listo para enviar tu carga? Contacta con nuestro experimentado equipo para soluciones logísticas personalizadas y cotizaciones competitivas.'
     }
   },
   common: {
-    cancel: 'Cancelar'
+    loading: 'Cargando...',
+    error: 'Ha ocurrido un error',
+    retry: 'Reintentar',
+    close: 'Cerrar',
+    save: 'Guardar',
+    cancel: 'Cancelar',
+    confirm: 'Confirmar',
+    back: 'Atrás',
+    next: 'Siguiente',
+    previous: 'Anterior',
+    readMore: 'Leer Más',
+    showMore: 'Mostrar Más',
+    showLess: 'Mostrar Menos'
+  },
+  footer: {
+    description: 'Soluciones confiables de transporte de carga para empresas en todo el país.',
+    address: 'Calle Transporte 123\nDistrito Logístico\nCiudad, Estado 12345',
+    phone: '(123) 456-7890',
+    email: 'info@sacitir.com',
+    hours: 'Lun-Vie: 8AM - 6PM',
+    quickLinks: 'Enlaces Rápidos',
+    services: 'Servicios',
+    copyright: 'Todos los derechos reservados.',
+    followUs: 'Síguenos',
+    newsletter: {
+      title: 'Boletín Informativo',
+      description: 'Suscríbete a nuestro boletín para recibir las últimas actualizaciones y ofertas.',
+      placeholder: 'Tu dirección de correo',
+      button: 'Suscribirse'
+    }
   }
 };
 

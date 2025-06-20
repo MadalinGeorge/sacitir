@@ -168,6 +168,9 @@ const en = {
   contact: {
     title: 'Contact Us',
     subtitle: 'Get in touch with our team',
+    getInTouch: 'Get in Touch',
+    sendMessage: 'Send us a Message',
+    findUs: 'Find Us',
     form: {
       title: 'Send us a Message',
       name: 'Name',
@@ -189,7 +192,10 @@ const en = {
       address: 'Address',
       phone: 'Phone',
       email: 'Email',
-      hours: 'Business Hours'
+      hours: 'Business Hours',
+      weekdays: 'Monday-Friday',
+      weekend: 'Saturday-Sunday',
+      closed: 'Closed'
     },
     getInTouch: {
       title: 'Get in Touch',
@@ -237,6 +243,23 @@ const en = {
     readMore: 'Read More',
     showMore: 'Show More',
     showLess: 'Show Less'
+  },
+  footer: {
+    description: 'Reliable freight transport solutions for businesses nationwide.',
+    address: '123 Transport Avenue\nLogistics District\nCity, State 12345',
+    phone: '(123) 456-7890',
+    email: 'info@sacitir.com',
+    hours: 'Mon-Fri: 8AM - 6PM',
+    quickLinks: 'Quick Links',
+    services: 'Services',
+    copyright: 'All rights reserved.',
+    followUs: 'Follow Us',
+    newsletter: {
+      title: 'Newsletter',
+      description: 'Subscribe to our newsletter for the latest updates and offers.',
+      placeholder: 'Your email address',
+      button: 'Subscribe'
+    }
   }
 };
 
