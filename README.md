@@ -7,7 +7,6 @@ A modern, responsive corporate website for SACITIR freight transport company bui
 - **Modern Design**: Clean, professional layout with parallax scrolling effects
 - **Responsive**: Fully responsive design for mobile, tablet, and desktop
 - **Internationalization**: Available in Spanish and English
-- **Dark Mode**: Toggle between light and dark themes
 - **Parallax Effects**: Engaging parallax scrolling on homepage
 - **Dynamic Job Listings**: Job postings managed via Google Sheets
 - **Contact Forms**: Powered by EmailJS for contact and job applications
