@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ClientProviders from '@/components/ClientProviders';
+import type { Viewport } from "next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -10,9 +11,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "SACITIR - Reliable Freight Transport Solutions",
-  description: "SACITIR provides safe, reliable, and efficient freight transport solutions. Trusted partner for cargo transportation across the nation with over 20 years of experience.",
-  keywords: "freight transport, cargo, logistics, shipping, refrigerated transport, national transport, SACITIR",
+  title: "SACITIR - Transporte de Mercancías por Carretera",
+  description: "SACITIR es una empresa especializada en transporte nacional e internacional de mercancías refrigeradas. Más de 20 años de experiencia ofreciendo soluciones seguras, puntuales y eficaces para tu carga.",
+  keywords: "transporte nacional, transporte internacional, transporte frigorífico, logística, transporte de mercancías, camiones frigoríficos, SACITIR, transporte seguro",
   authors: [{ name: "SACITIR" }],
   robots: "index, follow",
   icons: {
@@ -20,17 +21,33 @@ export const metadata: Metadata = {
     apple: '/sacitir/images/logo/logo.jpg',
   },
   openGraph: {
-    title: "SACITIR - Reliable Freight Transport Solutions",
-    description: "SACITIR provides safe, reliable, and efficient freight transport solutions nationwide.",
+    title: "SACITIR - Transporte Nacional e Internacional de Mercancías",
+    description: "Confía en SACITIR para el transporte de mercancías por carretera. Especialistas en transporte frigorífico nacional e internacional.",
     type: "website",
-    locale: "en_US",
-    alternateLocale: "es_ES",
+    locale: "es_ES",
+    alternateLocale: "en_US",
+    url: "https://madalingeorge.github.io/sacitir",
+    siteName: "SACITIR"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SACITIR - Transporte de Mercancías por Carretera",
+    description: "SACITIR es una empresa especializada en transporte nacional e internacional de mercancías refrigeradas. Más de 20 años de experiencia ofreciendo soluciones seguras, puntuales y eficaces para tu carga.",
+    site: "@sacitir",
+  },
+  metadataBase: new URL("https://madalingeorge.github.io/sacitir"),
+  alternates: {
+    canonical: "https://madalingeorge.github.io/sacitir",
+    languages: {
+      es: "https://madalingeorge.github.io/sacitir",
+      en: "https://madalingeorge.github.io/sacitir/en"
+    }
   },
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   width: "device-width",
-  initialScale: 1,
+  initialScale: 1
 };
 
 export default function RootLayout({
