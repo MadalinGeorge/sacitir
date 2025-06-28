@@ -24,11 +24,11 @@ const Navigation = () => {
   };
 
   const navItems = [
-    { key: 'nav.home', href: '/' },
-    { key: 'nav.about', href: '/about' },
-    { key: 'nav.services', href: '/services' },
-    { key: 'nav.career', href: '/career' },
-    { key: 'nav.contact', href: '/contact' },
+    { key: 'nav.home', href: `/${locale}` },
+    { key: 'nav.about', href: `/${locale}/about` },
+    { key: 'nav.services', href: `/${locale}/services` },
+    { key: 'nav.career', href: `/${locale}/career` },
+    { key: 'nav.contact', href: `/${locale}/contact` },
   ];
 
   const toggleLanguage = () => {
@@ -48,7 +48,7 @@ const Navigation = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center">
+            <Link href={`/${locale}`} className="flex items-center">
               <Image 
                 src={getImagePath("/images/logo/logo-full.jpg")} 
                 alt="SACITIR Logo" 

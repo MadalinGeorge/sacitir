@@ -86,6 +86,11 @@ const en = {
       leadership: 'Industry Innovation',
       leadershipDesc: 'Using Euro 6 latest generation trucks with GPS tracking'
     },
+    stats: {
+      fleet: 'Fleet Vehicles',
+      cities: 'Cities Served',
+      years: 'Years Experience',
+    },
     cta: {
       title: 'Ready to Partner with Us?',
       description: 'Experience the Transportes Sacitir difference with our reliable transport solutions',

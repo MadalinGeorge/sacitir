@@ -1,10 +1,10 @@
 const es = {
   nav: {
     home: 'Inicio',
-    about: 'Acerca de',
+    about: 'Sobre nosotros',
     services: 'Servicios',
-    career: 'Carreras',
-    contact: 'Contacto',
+    career: 'Trabaja con nosotros',
+    contact: 'Contacta con nosotros',
     language: 'Idioma'
   },
   home: {
@@ -86,6 +86,11 @@ const es = {
       leadership: 'Innovación en la Industria',
       leadershipDesc: 'Utilizando camiones de última generación Euro 6 con seguimiento GPS'
     },
+    stats: {
+      fleet: 'Vehículos en Flota',
+      cities: 'Ciudades Atendidas',
+      years: 'Años de Experiencia',
+    },
     cta: {
       title: '¿Listo para Asociarte con Nosotros?',
       description: 'Experimenta la diferencia de Transportes Sacitir con nuestras soluciones confiables de transporte',
@@ -125,42 +130,42 @@ const es = {
     }
   },
   career: {
-    title: 'Oportunidades de Carrera',
-    subtitle: 'Únete a nuestro equipo y construye tu carrera con SACITIR',
+    title: 'Trabaja con nosotros',
+    subtitle: 'Únete a nuestro equipo y construye tu futuro con SACITIR',
     noJobs: 'No hay ofertas de trabajo disponibles en este momento. Por favor, vuelve más tarde.',
-    apply: 'Aplicar Ahora',
+    apply: 'Aplicar ahora',
     requirements: 'Requisitos',
     description: 'Descripción',
     location: 'Ubicación',
     type: 'Tipo',
-    currentOpenings: 'Ofertas Actuales',
+    currentOpenings: 'Ofertas actuales',
     joinTeam: 'Únete a nuestro equipo y construye una carrera gratificante en la industria logística',
-    contactUs: 'Contáctanos',
+    contactUs: 'Contacta con nosotros',
     checkBack: 'Vuelve pronto para nuevas oportunidades o contáctanos directamente.',
     whyWork: {
-      title: '¿Por Qué Trabajar con SACITIR?',
+      title: '¿Por qué trabajar con SACITIR?',
       description: 'Ofrecemos beneficios competitivos y un ambiente de trabajo de apoyo',
       team: {
-        title: 'Gran Equipo',
+        title: 'Gran equipo',
         description: 'Trabaja con profesionales experimentados en un ambiente colaborativo'
       },
       benefits: {
-        title: 'Beneficios Competitivos',
+        title: 'Beneficios competitivos',
         description: 'Seguro médico, planes de jubilación y bonos por rendimiento'
       },
       growth: {
-        title: 'Crecimiento Profesional',
+        title: 'Crecimiento profesional',
         description: 'Oportunidades de avance y desarrollo profesional'
       }
     },
     applicationForm: {
-      title: 'Solicitud de Empleo',
-      name: 'Nombre Completo',
-      email: 'Correo Electrónico',
+      title: 'Solicitud de empleo',
+      name: 'Nombre completo',
+      email: 'Correo electrónico',
       phone: 'Teléfono',
       position: 'Posición',
-      message: 'Carta de Presentación / Información Adicional',
-      submit: 'Enviar Solicitud',
+      message: 'Carta de presentación / Información adicional',
+      submit: 'Enviar solicitud',
       success: '¡Solicitud enviada exitosamente!',
       error: 'Error al enviar la solicitud. Por favor, inténtalo de nuevo.'
     }

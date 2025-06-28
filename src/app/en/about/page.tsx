@@ -24,10 +24,10 @@ export default function About() {
   const statsRef = useRef(null);
 
   const stats = useMemo(() => [
-    { icon: Truck, number: 20, label: 'Fleet Vehicles', key: 'fleet' as const },
-    { icon: Globe, number: 50, label: 'Cities Served', key: 'cities' as const },
-    { icon: Award, number: 10, label: 'Years Experience', key: 'years' as const },
-  ], []);
+    { icon: Truck, number: 20, label: t('about.stats.fleet'), key: 'fleet' as const },
+    { icon: Globe, number: 50, label: t('about.stats.cities'), key: 'cities' as const },
+    { icon: Award, number: 10, label: t('about.stats.years'), key: 'years' as const },
+  ], [t]);
 
   const values = [
     {
@@ -354,7 +354,7 @@ export default function About() {
             >
               <Link
                 href="/contact"
-                className="btn-secondary"
+                className="btn-secondary inline-flex items-center justify-center"
               >
                 {t('about.cta.button')}
               </Link>
@@ -365,7 +365,7 @@ export default function About() {
             >
               <Link
                 href="/services"
-                className="btn-secondary"
+                className="btn-secondary inline-flex items-center justify-center"
               >
                 {t('about.cta.learnMore')}
               </Link>
