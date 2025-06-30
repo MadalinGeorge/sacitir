@@ -5,16 +5,16 @@ export const metadata = {
   description: "Descubre todos los servicios de SACITIR: transporte nacional e internacional, transporte frigorífico, logística y soluciones integrales para tu carga. Más de 20 años de experiencia en el sector.",
   keywords: "servicios de transporte, transporte frigorífico, transporte nacional, transporte internacional, logística, SACITIR, camiones, soluciones logísticas, España",
   alternates: {
-    canonical: "https://madalingeorge.github.io/sacitir/services",
+    canonical: "https://sacitir.es/es/services",
     languages: {
-      es: "https://madalingeorge.github.io/sacitir/services",
-      en: "https://madalingeorge.github.io/sacitir/en/services"
+      es: "https://sacitir.es/es/services",
+      en: "https://sacitir.com/en/services"
     }
   },
   openGraph: {
     title: "Servicios de Transporte de Mercancías | SACITIR España",
     description: "Descubre todos los servicios de SACITIR: transporte nacional e internacional, transporte frigorífico, logística y soluciones integrales para tu carga. Más de 20 años de experiencia en el sector.",
-    url: "https://madalingeorge.github.io/sacitir/services",
+    url: "https://sacitir.es/es/services",
     type: "website",
     locale: "es_ES",
     siteName: "SACITIR"

@@ -1,28 +1,28 @@
 import ServicesClient from '@/components/ServicesClient';
 
 export const metadata = {
-  title: "Servicios de Transporte de Mercancías | SACITIR España",
-  description: "Descubre todos los servicios de SACITIR: transporte nacional e internacional, transporte frigorífico, logística y soluciones integrales para tu carga. Más de 20 años de experiencia en el sector.",
-  keywords: "servicios de transporte, transporte frigorífico, transporte nacional, transporte internacional, logística, SACITIR, camiones, soluciones logísticas, España",
+  title: "Freight Transport Services | SACITIR Spain",
+  description: "Discover all SACITIR services: national and international transport, refrigerated transport, logistics, and comprehensive solutions for your cargo. Over 20 years of experience in the sector.",
+  keywords: "freight services, refrigerated transport, national transport, international transport, logistics, SACITIR, trucks, logistics solutions, Spain",
   alternates: {
-    canonical: "https://madalingeorge.github.io/sacitir/services",
+    canonical: "https://sacitir.com/en/services",
     languages: {
-      es: "https://madalingeorge.github.io/sacitir/services",
-      en: "https://madalingeorge.github.io/sacitir/en/services"
+      es: "https://sacitir.es/es/services",
+      en: "https://sacitir.com/en/services"
     }
   },
   openGraph: {
-    title: "Servicios de Transporte de Mercancías | SACITIR España",
-    description: "Descubre todos los servicios de SACITIR: transporte nacional e internacional, transporte frigorífico, logística y soluciones integrales para tu carga. Más de 20 años de experiencia en el sector.",
-    url: "https://madalingeorge.github.io/sacitir/services",
+    title: "Freight Transport Services | SACITIR Spain",
+    description: "Discover all SACITIR services: national and international transport, refrigerated transport, logistics, and comprehensive solutions for your cargo. Over 20 years of experience in the sector.",
+    url: "https://sacitir.com/en/services",
     type: "website",
-    locale: "es_ES",
+    locale: "en_US",
     siteName: "SACITIR"
   },
   twitter: {
     card: "summary_large_image",
-    title: "Servicios de Transporte de Mercancías | SACITIR España",
-    description: "Descubre todos los servicios de SACITIR: transporte nacional e internacional, transporte frigorífico, logística y soluciones integrales para tu carga. Más de 20 años de experiencia en el sector.",
+    title: "Freight Transport Services | SACITIR Spain",
+    description: "Discover all SACITIR services: national and international transport, refrigerated transport, logistics, and comprehensive solutions for your cargo. Over 20 years of experience in the sector.",
     site: "@sacitir"
   }
 };

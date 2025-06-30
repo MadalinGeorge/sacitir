@@ -132,10 +132,17 @@ const es = {
   career: {
     title: 'Trabaja con nosotros',
     subtitle: 'Únete a nuestro equipo y construye tu futuro con SACITIR',
+    description: 'En SACITIR buscamos personas comprometidas y apasionadas por el mundo del transporte y la logística. Si quieres formar parte de una empresa en crecimiento, con oportunidades de desarrollo profesional y un gran ambiente de trabajo, ¡te estamos esperando!',
+    benefits: {
+      stability: 'Estabilidad laboral en una empresa consolidada',
+      training: 'Formación continua y oportunidades de crecimiento',
+      environment: 'Buen ambiente de trabajo y equipo profesional',
+      salary: 'Salarios competitivos y beneficios sociales'
+    },
     noJobs: 'No hay ofertas de trabajo disponibles en este momento. Por favor, vuelve más tarde.',
     apply: 'Aplicar ahora',
     requirements: 'Requisitos',
-    description: 'Descripción',
+    descriptionLabel: 'Descripción',
     location: 'Ubicación',
     type: 'Tipo',
     currentOpenings: 'Ofertas actuales',

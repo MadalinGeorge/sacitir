@@ -130,12 +130,19 @@ const en = {
     }
   },
   career: {
-    title: 'Career Opportunities',
-    subtitle: 'Join our team and build your career with Transportes Sacitir',
+    title: 'Work with us',
+    subtitle: 'Join our team and build your future with SACITIR',
+    description: 'At SACITIR, we are looking for committed people passionate about transport and logistics. If you want to be part of a growing company, with professional development opportunities and a great work environment, we are waiting for you!',
+    benefits: {
+      stability: 'Job stability in a well-established company',
+      training: 'Ongoing training and growth opportunities',
+      environment: 'Great work environment and professional team',
+      salary: 'Competitive salaries and social benefits'
+    },
     noJobs: 'No job openings available at the moment. Please check back later.',
     apply: 'Apply Now',
     requirements: 'Requirements',
-    description: 'Description',
+    descriptionLabel: 'Description',
     location: 'Location',
     type: 'Type',
     currentOpenings: 'Current Openings',
@@ -143,7 +150,7 @@ const en = {
     contactUs: 'Contact Us',
     checkBack: 'Check back soon for new opportunities or contact us directly.',
     whyWork: {
-      title: 'Why Work With Transportes Sacitir?',
+      title: 'Why Work With SACITIR?',
       description: 'We offer competitive benefits and a supportive work environment',
       team: {
         title: 'Great Team',

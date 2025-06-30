@@ -1,28 +1,28 @@
 import HomeClient from '@/components/HomeClient';
 
 export const metadata = {
-  title: "SACITIR - Transporte de Mercancías por Carretera | Nacional e Internacional",
-  description: "Empresa líder en transporte nacional e internacional de mercancías por carretera. Especialistas en transporte frigorífico, logística y soluciones seguras para tu carga en España y Europa.",
-  keywords: "transporte de mercancías, transporte nacional, transporte internacional, transporte frigorífico, logística, camiones, SACITIR, España, soluciones logísticas, carga segura",
+  title: "SACITIR - Road Freight Transport | National & International",
+  description: "Leading company in national and international road freight transport. Specialists in refrigerated transport, logistics, and secure solutions for your cargo in Spain and Europe.",
+  keywords: "freight transport, national transport, international transport, refrigerated transport, logistics, trucks, SACITIR, Spain, logistics solutions, secure cargo",
   alternates: {
-    canonical: "https://madalingeorge.github.io/sacitir/",
+    canonical: "https://sacitir.com/en",
     languages: {
-      es: "https://madalingeorge.github.io/sacitir/",
-      en: "https://madalingeorge.github.io/sacitir/en"
+      es: "https://sacitir.es/es",
+      en: "https://sacitir.com/en"
     }
   },
   openGraph: {
-    title: "SACITIR - Transporte de Mercancías por Carretera | Nacional e Internacional",
-    description: "Empresa líder en transporte nacional e internacional de mercancías por carretera. Especialistas en transporte frigorífico, logística y soluciones seguras para tu carga en España y Europa.",
-    url: "https://madalingeorge.github.io/sacitir/",
+    title: "SACITIR - Road Freight Transport | National & International",
+    description: "Leading company in national and international road freight transport. Specialists in refrigerated transport, logistics, and secure solutions for your cargo in Spain and Europe.",
+    url: "https://sacitir.com/en",
     type: "website",
-    locale: "es_ES",
+    locale: "en_US",
     siteName: "SACITIR"
   },
   twitter: {
     card: "summary_large_image",
-    title: "SACITIR - Transporte de Mercancías por Carretera | Nacional e Internacional",
-    description: "Empresa líder en transporte nacional e internacional de mercancías por carretera. Especialistas en transporte frigorífico, logística y soluciones seguras para tu carga en España y Europa.",
+    title: "SACITIR - Road Freight Transport | National & International",
+    description: "Leading company in national and international road freight transport. Specialists in refrigerated transport, logistics, and secure solutions for your cargo in Spain and Europe.",
     site: "@sacitir"
   }
 };
