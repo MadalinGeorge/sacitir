@@ -211,6 +211,30 @@ const es = {
     },
     location: {
       title: 'Nuestra Ubicación',
+      description: 'Visita nuestra sede o encuéntranos en el mapa',
+      mapPlaceholder: 'Mapa Interactivo',
+      mapNote: 'Integración con Google Maps, MapBox o servicio similar'
+    },
+    immediateAssistance: {
+      title: '¿Necesitas Asistencia Inmediata?',
+      description: 'Nuestro equipo está listo para ayudarte con tus necesidades de transporte'
+    },
+    quickActions: {
+      call: {
+        title: 'Llámanos Ahora',
+        description: 'Habla directamente con nuestros expertos en logística',
+        button: 'Llamar Ahora'
+      },
+      email: {
+        title: 'Cotización por Email',
+        description: 'Obtén una cotización detallada por email',
+        button: 'Enviar Email'
+      },
+      chat: {
+        title: 'Chat en Vivo',
+        description: 'Chatea con nuestro equipo de soporte en línea',
+        button: 'Iniciar Chat'
+      }
     }
   },
   common: {
@@ -227,6 +251,24 @@ const es = {
     readMore: 'Leer Más',
     showMore: 'Mostrar Más',
     showLess: 'Mostrar Menos'
+  },
+  cookies: {
+    title: 'Utilizamos cookies',
+    description: 'Utilizamos cookies para mejorar tu experiencia de navegación, mostrar contenido personalizado y analizar nuestro tráfico. Al hacer clic en "Aceptar Todo", consientes el uso de cookies.',
+    acceptAll: 'Aceptar Todo',
+    rejectAll: 'Rechazar Todo',
+    customize: 'Personalizar',
+    necessary: 'Necesarias',
+    necessaryDesc: 'Estas cookies son esenciales para que el sitio web funcione correctamente.',
+    analytics: 'Analíticas',
+    analyticsDesc: 'Estas cookies nos ayudan a entender cómo los visitantes interactúan con nuestro sitio web.',
+    marketing: 'Marketing',
+    marketingDesc: 'Estas cookies se utilizan para mostrar anuncios personalizados.',
+    preferences: 'Preferencias',
+    preferencesDesc: 'Estas cookies recuerdan tus elecciones y preferencias.',
+    save: 'Guardar Preferencias',
+    learnMore: 'Saber Más',
+    policy: 'Política de Cookies'
   },
   footer: {
     description: 'Soluciones confiables de transporte de carga para empresas en todo el país.',

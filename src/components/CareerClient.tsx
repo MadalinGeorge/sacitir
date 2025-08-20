@@ -2,9 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { useLocale } from "@/context/LocaleContext";
-import { Briefcase, MapPin, Clock, DollarSign, Users, Send, CheckCircle } from "lucide-react";
-import Link from "next/link";
-import * as motion from "motion/react-client";
+import { Briefcase, MapPin, Clock, DollarSign, Users, CheckCircle } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface JobOffer {
   id: string;

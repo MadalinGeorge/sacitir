@@ -2,9 +2,9 @@
 
 import React, { useState, useRef } from 'react';
 import { useLocale } from '@/context/LocaleContext';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, CheckCircle, AlertCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
-import * as motion from 'motion/react-client';
+import { motion } from 'framer-motion';
 
 const getTranslation = (t: (key: string) => string | string[], key: string): string => {
   const translation = t(key);
@@ -37,7 +37,7 @@ export default function ContactClient() {
           setFormData({ name: '', email: '', subject: '', message: '' });
         }, 3000);
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
       setTimeout(() => {
         setSubmitStatus('idle');
@@ -51,7 +51,7 @@ export default function ContactClient() {
   };
 
   return (
-    <div className="pt-24 pb-16 md:pt-32 md:pb-24">
+    <div className="pb-16 md:pb-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
         <motion.div

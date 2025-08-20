@@ -252,6 +252,24 @@ const en = {
     showMore: 'Show More',
     showLess: 'Show Less'
   },
+  cookies: {
+    title: 'We use cookies',
+    description: 'We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.',
+    acceptAll: 'Accept All',
+    rejectAll: 'Reject All',
+    customize: 'Customize',
+    necessary: 'Necessary',
+    necessaryDesc: 'These cookies are essential for the website to function properly.',
+    analytics: 'Analytics',
+    analyticsDesc: 'These cookies help us understand how visitors interact with our website.',
+    marketing: 'Marketing',
+    marketingDesc: 'These cookies are used to deliver personalized advertisements.',
+    preferences: 'Preferences',
+    preferencesDesc: 'These cookies remember your choices and preferences.',
+    save: 'Save Preferences',
+    learnMore: 'Learn More',
+    policy: 'Cookie Policy'
+  },
   footer: {
     description: 'Reliable freight transport solutions for businesses nationwide.',
     address: '123 Transport Avenue\nLogistics District\nCity, State 12345',
