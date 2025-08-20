@@ -126,9 +126,9 @@ export default function CookieConsent() {
                 <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
                   <button
                     onClick={() => setShowSettings(true)}
-                    className="btn-outline text-sm px-4 py-2"
+                    className="btn-outline text-sm px-4 py-2 flex items-center justify-center gap-2"
                   >
-                    <Settings className="w-4 h-4 mr-2" />
+                    <Settings className="w-4 h-4" />
                     {t('cookies.customize')}
                   </button>
                   <button
