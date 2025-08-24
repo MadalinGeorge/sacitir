@@ -290,7 +290,14 @@ const en = {
       title: 'Newsletter',
       description: 'Subscribe to our newsletter for the latest updates and offers.',
       placeholder: 'Your email address',
-      button: 'Subscribe'
+      button: 'Subscribe',
+      subscribing: 'Subscribing...',
+      success: 'Successfully subscribed!',
+      successMessage: 'Thank you for subscribing to our newsletter.',
+      error: 'Subscription failed',
+      errorMessage: 'Please check your email address and try again.',
+      alreadySubscribed: 'Email already subscribed',
+      invalidEmail: 'Please enter a valid email address'
     }
   }
 };

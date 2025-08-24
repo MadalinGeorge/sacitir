@@ -290,7 +290,14 @@ const es = {
       title: 'Boletín Informativo',
       description: 'Suscríbete a nuestro boletín para recibir las últimas actualizaciones y ofertas.',
       placeholder: 'Tu dirección de correo',
-      button: 'Suscribirse'
+      button: 'Suscribirse',
+      subscribing: 'Suscribiendo...',
+      success: '¡Suscrito exitosamente!',
+      successMessage: 'Gracias por suscribirte a nuestro boletín.',
+      error: 'Error en la suscripción',
+      errorMessage: 'Por favor verifica tu dirección de correo e inténtalo de nuevo.',
+      alreadySubscribed: 'El correo ya está suscrito',
+      invalidEmail: 'Por favor ingresa una dirección de correo válida'
     }
   }
 };

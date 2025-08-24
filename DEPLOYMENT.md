@@ -71,6 +71,7 @@ src/
 NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY=your_api_key
 NEXT_PUBLIC_GOOGLE_SHEETS_ID_EN=english_sheet_id
 NEXT_PUBLIC_GOOGLE_SHEETS_ID_ES=spanish_sheet_id
+NEXT_PUBLIC_SACITIR_NEWSLETTER_LIST=newsletter_sheet_id
 ```
 
 ### For Vercel deployment:
@@ -83,7 +84,7 @@ VERCEL_PROJECT_ID=your_project_id
 ## 🔄 How It Works
 
 ### Google Sheets Integration
-1. **Vercel**: Uses API routes (`/api/jobs`) for server-side Google Sheets access
+1. **Vercel**: Uses API routes (`/api/jobs`, `/api/newsletter`) for server-side Google Sheets access
 2. **GitHub Pages**: Uses client-side Google Sheets API directly
 
 ### Build Process

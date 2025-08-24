@@ -6,6 +6,10 @@ const GOOGLE_SHEETS_ID_EN = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_ID_EN || '18jO
 const GOOGLE_SHEETS_ID_ES = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_ID_ES || '1wBWFHBUTeEt4iyWpHeymLhgjaMM9OhWQxtCHOAohdro';
 const GOOGLE_SHEETS_RANGE = 'A:J';
 
+// Newsletter subscribers sheet
+const NEWSLETTER_SHEET_ID = process.env.NEXT_PUBLIC_SACITIR_NEWSLETTER_LIST || '1kzSLNI03DkvSuaHN6PH-sUO3tWtp_vlMi2iRdpQn7WE';
+const NEWSLETTER_SHEET_RANGE = 'A:D';
+
 export async function fetchJobsFromGoogleSheetsClient(locale: 'en' | 'es' = 'en'): Promise<Job[]> {
   try {
     if (!GOOGLE_SHEETS_API_KEY) {
@@ -56,5 +60,49 @@ export async function fetchJobsFromGoogleSheetsClient(locale: 'en' | 'es' = 'en'
     return jobs.filter((job: Job) => job.title && job.description);
   } catch {
     return [];
+  }
+}
+
+export async function subscribeToNewsletterClient(email: string, locale: 'en' | 'es' = 'en'): Promise<boolean> {
+  try {
+    if (!GOOGLE_SHEETS_API_KEY || !NEWSLETTER_SHEET_ID) {
+      return false;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return false;
+    }
+
+    // Check if email already exists
+    const checkUrl = `https://sheets.googleapis.com/v4/spreadsheets/${NEWSLETTER_SHEET_ID}/values/${NEWSLETTER_SHEET_RANGE}?key=${GOOGLE_SHEETS_API_KEY}`;
+    const checkResponse = await fetch(checkUrl);
+    
+    if (checkResponse.ok) {
+      const checkData = await checkResponse.json();
+      const existingEmails = checkData.values?.slice(1).map((row: string[]) => row[0]) || [];
+      
+      if (existingEmails.includes(email)) {
+        return false; // Email already exists
+      }
+    }
+
+    // Append new subscriber
+    const appendUrl = `https://sheets.googleapis.com/v4/spreadsheets/${NEWSLETTER_SHEET_ID}/values/${NEWSLETTER_SHEET_RANGE}:append?valueInputOption=RAW&key=${GOOGLE_SHEETS_API_KEY}`;
+    
+    const response = await fetch(appendUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        values: [[email, new Date().toISOString(), locale, 'active']]
+      })
+    });
+
+    return response.ok;
+  } catch {
+    return false;
   }
 }

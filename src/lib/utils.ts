@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import emailjs from '@emailjs/browser';
 import { Job, ContactFormData, JobApplicationData } from '@/types';
-import { fetchJobsFromGoogleSheetsClient } from './googleSheetsClient';
+import { fetchJobsFromGoogleSheetsClient, subscribeToNewsletterClient } from './googleSheetsClient';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -134,5 +134,36 @@ export function getImagePath(path: string): string {
   const isProd = process.env.NODE_ENV === 'production';
   const basePath = isProd ? '/sacitir' : '';
   return `${basePath}${path}`;
+}
+
+// Newsletter subscription function with dual deployment support
+export async function subscribeToNewsletter(email: string, locale: 'en' | 'es' = 'en'): Promise<boolean> {
+  // Check if we're in a static export (GitHub Pages) or have API routes (Vercel)
+  const isStaticExport = process.env.NODE_ENV === 'production' && typeof window !== 'undefined';
+  
+  try {
+    if (isStaticExport) {
+      // Use client-side Google Sheets API for GitHub Pages
+      return await subscribeToNewsletterClient(email, locale);
+    } else {
+      // Use API route for Vercel or development
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, locale }),
+      });
+      
+      if (!response.ok) {
+        return false;
+      }
+
+      const data = await response.json();
+      return data.success || false;
+    }
+  } catch {
+    return false;
+  }
 }
 
