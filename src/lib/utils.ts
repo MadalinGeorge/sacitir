@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import emailjs from '@emailjs/browser';
 import { Job, ContactFormData, JobApplicationData } from '@/types';
+import { fetchJobsFromGoogleSheetsClient } from './googleSheetsClient';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -31,14 +32,17 @@ export async function sendContactEmail(data: ContactFormData): Promise<boolean> 
       }
     );
     return result.status === 200;
-  } catch (error) {
-    console.error('Error sending contact email:', error);
+  } catch {
     return false;
   }
 }
 
 export async function sendJobApplication(data: JobApplicationData): Promise<boolean> {
   try {
+    // If there's a CV file, we would typically upload it to a file storage service
+    // For now, we'll just include the filename in the email
+    const cvFileName = data.cvFile ? data.cvFile.name : 'No CV attached';
+    
     const result = await emailjs.send(
       EMAILJS_SERVICE_ID,
       EMAILJS_TEMPLATE_ID_JOB,
@@ -48,51 +52,57 @@ export async function sendJobApplication(data: JobApplicationData): Promise<bool
         phone: data.phone,
         position: data.position,
         message: data.message,
+        cv_file: cvFileName,
       }
     );
     return result.status === 200;
-  } catch (error) {
-    console.error('Error sending job application:', error);
+  } catch {
     return false;
   }
 }
 
-// Google Sheets integration for job listings
-const GOOGLE_SHEETS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY || '';
-const GOOGLE_SHEETS_ID = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_ID || '';
-const GOOGLE_SHEETS_RANGE = 'Jobs!A:F'; // Adjust range as needed
-
-export async function fetchJobsFromGoogleSheets(): Promise<Job[]> {
+// Helper function to upload CV file to a storage service
+export async function uploadCvFile(file: File): Promise<string | null> {
   try {
-    if (!GOOGLE_SHEETS_API_KEY || !GOOGLE_SHEETS_ID) {
-      console.warn('Google Sheets API key or ID not configured');
-      return [];
-    }
-
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${GOOGLE_SHEETS_ID}/values/${GOOGLE_SHEETS_RANGE}?key=${GOOGLE_SHEETS_API_KEY}`;
-    const response = await fetch(url);
+    // This is a placeholder for actual file upload implementation
+    // You would typically upload to services like:
+    // - AWS S3
+    // - Google Cloud Storage
+    // - Firebase Storage
+    // - Your own server
     
-    if (!response.ok) {
-      throw new Error('Failed to fetch jobs from Google Sheets');
-    }
-
-    const data = await response.json();
-    const rows = data.values || [];
+    // For now, we'll simulate the upload
+    await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // Skip header row
-    const jobs = rows.slice(1).map((row: string[], index: number) => ({
-      id: `job-${index}`,
-      title: row[0] || '',
-      description: row[1] || '',
-      requirements: (row[2] || '').split(',').map((req: string) => req.trim()).filter(Boolean),
-      location: row[3] || '',
-      type: (row[4] || 'Full-time') as 'Full-time' | 'Part-time' | 'Contract',
-      postedDate: row[5] || new Date().toISOString(),
-    }));
-
-    return jobs.filter((job: Job) => job.title && job.description);
+    // Return a mock file URL
+    return `https://storage.example.com/cv/${Date.now()}-${file.name}`;
   } catch {
-    console.error('Error fetching jobs from Google Sheets');
+    return null;
+  }
+}
+
+
+
+export async function fetchJobsFromGoogleSheets(locale: 'en' | 'es' = 'en'): Promise<Job[]> {
+  // Check if we're in a static export (GitHub Pages) or have API routes (Vercel)
+  const isStaticExport = process.env.NODE_ENV === 'production' && typeof window !== 'undefined';
+  
+  try {
+    if (isStaticExport) {
+      // Use client-side Google Sheets API for GitHub Pages
+      return await fetchJobsFromGoogleSheetsClient(locale);
+    } else {
+      // Use API route for Vercel or development
+      const response = await fetch(`/api/jobs?locale=${locale}`);
+      
+      if (!response.ok) {
+        throw new Error(`Failed to fetch jobs from API for locale: ${locale} - Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data.jobs || [];
+    }
+  } catch {
     return [];
   }
 }

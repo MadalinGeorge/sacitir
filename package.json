@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:vercel": "node scripts/setup-api.js && next build",
+    "build:github": "cross-env DEPLOYMENT_TARGET=github-pages node scripts/setup-api.js && cross-env DEPLOYMENT_TARGET=github-pages next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "export": "next build",
-    "deploy": "npm run build && touch out/.nojekyll"
+    "export": "cross-env DEPLOYMENT_TARGET=github-pages node scripts/setup-api.js && cross-env DEPLOYMENT_TARGET=github-pages next build",
+    "deploy": "npm run build:github && touch out/.nojekyll"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -30,6 +32,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.14",
+    "cross-env": "^10.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
     "postcss": "^8.4.31",

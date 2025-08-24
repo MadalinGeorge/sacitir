@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useLocale } from "@/context/LocaleContext";
 import { Briefcase, MapPin, Clock, DollarSign, Users, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { sendJobApplication, fetchJobsFromGoogleSheets } from "@/lib/utils";
 
 interface JobOffer {
   id: string;
@@ -11,9 +12,10 @@ interface JobOffer {
   department: string;
   location: string;
   type: string;
-  salary?: string;
+  salary: string;
   description: string;
   requirements: string[];
+  status: boolean;
   posted: string;
 }
 
@@ -29,46 +31,70 @@ export default function CareerClient() {
     position: "",
     message: ""
   });
+  const [cvFile, setCvFile] = useState<File | null>(null);
+  const [cvError, setCvError] = useState<string>("");
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   useEffect(() => {
     const fetchJobs = async () => {
       setLoading(true);
       try {
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        const mockJobs: JobOffer[] = [
-          {
-            id: "1",
-            title: locale === "es" ? "Conductor de camión" : "Truck Driver",
-            department: locale === "es" ? "Operaciones" : "Operations",
-            location: locale === "es" ? "Toda España" : "Nationwide",
-            type: locale === "es" ? "Tiempo completo" : "Full-time",
-            salary: locale === "es" ? "25.000€ - 35.000€" : "$50,000 - $65,000",
-            description: locale === "es"
-              ? "Buscamos conductores de camión con experiencia para unirse a nuestra flota en crecimiento."
-              : "We are seeking experienced truck drivers to join our growing fleet.",
-            requirements: locale === "es"
-              ? ["Carnet C+E", "2+ años de experiencia", "Historial de conducción limpio"]
-              : ["Valid CDL license", "2+ years experience", "Clean driving record"],
-            posted: "2024-01-15"
-          },
-          {
-            id: "2",
-            title: locale === "es" ? "Coordinador/a de logística" : "Logistics Coordinator",
-            department: locale === "es" ? "Logística" : "Logistics",
-            location: locale === "es" ? "Oficina central" : "Main Office",
-            type: locale === "es" ? "Tiempo completo" : "Full-time",
-            salary: locale === "es" ? "22.000€ - 28.000€" : "$45,000 - $55,000",
-            description: locale === "es"
-              ? "Coordina envíos y gestiona operaciones logísticas."
-              : "Coordinate shipments and manage logistics operations.",
-            requirements: locale === "es"
-              ? ["Grado universitario preferido", "Experiencia en logística", "Habilidades de comunicación"]
-              : ["Bachelor's degree preferred", "Experience in logistics", "Strong communication skills"],
-            posted: "2024-01-10"
-          }
-        ];
-        setJobs(mockJobs);
+                 // Fetch jobs from Google Sheets based on current locale
+         const jobsFromSheets = await fetchJobsFromGoogleSheets(locale);
+         
+                 if (jobsFromSheets.length > 0) {
+          // Convert Job interface to JobOffer interface
+          const convertedJobs: JobOffer[] = jobsFromSheets.map(job => ({
+            id: job.id,
+            title: job.title,
+            department: job.department,
+            location: job.location,
+            type: job.type,
+            salary: job.salary,
+            description: job.description,
+            requirements: job.requirements,
+            status: job.status,
+            posted: job.posted
+          }));
+          setJobs(convertedJobs);
+        } else {
+          // Fallback to mock data if no jobs found
+          const fallbackJobs: JobOffer[] = [
+             {
+               id: "1",
+               title: locale === "es" ? "Conductor de camión" : "Truck Driver",
+               department: locale === "es" ? "Operaciones" : "Operations",
+               location: locale === "es" ? "Toda España" : "Nationwide",
+               type: locale === "es" ? "Tiempo completo" : "Full-time",
+               salary: locale === "es" ? "25.000€ - 35.000€" : "$50,000 - $65,000",
+               description: locale === "es"
+                 ? "Buscamos conductores de camión con experiencia para unirse a nuestra flota en crecimiento."
+                 : "We are seeking experienced truck drivers to join our growing fleet.",
+               requirements: locale === "es"
+                 ? ["Carnet C+E", "2+ años de experiencia", "Historial de conducción limpio"]
+                 : ["Valid CDL license", "2+ years experience", "Clean driving record"],
+               status: true,
+               posted: "2024-01-15"
+             },
+             {
+               id: "2",
+               title: locale === "es" ? "Coordinador/a de logística" : "Logistics Coordinator",
+               department: locale === "es" ? "Logística" : "Logistics",
+               location: locale === "es" ? "Oficina central" : "Main Office",
+               type: locale === "es" ? "Tiempo completo" : "Full-time",
+               salary: locale === "es" ? "22.000€ - 28.000€" : "$45,000 - $55,000",
+               description: locale === "es"
+                 ? "Coordina envíos y gestiona operaciones logísticas."
+                 : "Coordinate shipments and manage logistics operations.",
+               requirements: locale === "es"
+                 ? ["Grado universitario preferido", "Experiencia en logística", "Habilidades de comunicación"]
+                 : ["Bachelor's degree preferred", "Experience in logistics", "Strong communication skills"],
+               status: true,
+               posted: "2024-01-10"
+             }
+                     ];
+          setJobs(fallbackJobs);
+        }
       } catch {
         setJobs([]);
       } finally {
@@ -79,21 +105,85 @@ export default function CareerClient() {
   }, [locale]);
 
   const handleApply = (job: JobOffer) => {
-    setApplicationData(prev => ({ ...prev, position: job.title }));
+    setApplicationData(prev => ({ 
+      ...prev, 
+      position: job.title,
+      message: `${t("career.applicationForm.applyingFor")} ${job.title} (${job.department} - ${job.location})`
+    }));
+    setCvFile(null);
+    setCvError("");
     setShowApplicationForm(true);
+  };
+
+
+
+  const validateCvFile = (file: File): string => {
+    if (!file) {
+      const error = t("career.applicationForm.cvRequired");
+      return Array.isArray(error) ? error[0] : error;
+    }
+    
+    if (file.type !== "application/pdf") {
+      const error = t("career.applicationForm.cvInvalid");
+      return Array.isArray(error) ? error[0] : error;
+    }
+    
+    if (file.size > 5 * 1024 * 1024) { // 5MB limit
+      const error = t("career.applicationForm.cvSize");
+      return Array.isArray(error) ? error[0] : error;
+    }
+    
+    return "";
+  };
+
+  const handleCvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setCvFile(file);
+    
+    if (file) {
+      const error = validateCvFile(file);
+      setCvError(error);
+    } else {
+      setCvError("");
+    }
   };
 
   const handleSubmitApplication = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate CV file
+    if (!cvFile) {
+      const error = t("career.applicationForm.cvRequired");
+      setCvError(Array.isArray(error) ? error[0] : error);
+      return;
+    }
+    
+    const cvValidationError = validateCvFile(cvFile);
+    if (cvValidationError) {
+      setCvError(cvValidationError);
+      return;
+    }
+    
     setSubmitStatus("loading");
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitStatus("success");
-      setTimeout(() => {
-        setShowApplicationForm(false);
-        setSubmitStatus("idle");
-        setApplicationData({ name: "", email: "", phone: "", position: "", message: "" });
-      }, 2000);
+      // Send job application with CV file
+      const success = await sendJobApplication({
+        ...applicationData,
+        cvFile: cvFile
+      });
+      
+      if (success) {
+        setSubmitStatus("success");
+        setTimeout(() => {
+          setShowApplicationForm(false);
+          setSubmitStatus("idle");
+          setApplicationData({ name: "", email: "", phone: "", position: "", message: "" });
+          setCvFile(null);
+          setCvError("");
+        }, 2000);
+      } else {
+        setSubmitStatus("error");
+      }
     } catch {
       setSubmitStatus("error");
     }
@@ -262,7 +352,11 @@ export default function CareerClient() {
           <div className="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full relative">
             <button
               className="absolute top-2 right-2 text-secondaryBlack hover:text-mainRed"
-              onClick={() => setShowApplicationForm(false)}
+              onClick={() => {
+                setShowApplicationForm(false);
+                setCvFile(null);
+                setCvError("");
+              }}
               aria-label="Close"
             >
               ×
@@ -306,6 +400,27 @@ export default function CareerClient() {
                   value={applicationData.position}
                   readOnly
                 />
+              </div>
+              <div>
+                <label className="block mb-1 font-medium">
+                  {t("career.applicationForm.cv")} *
+                </label>
+                <input
+                  type="file"
+                  accept=".pdf"
+                  onChange={handleCvChange}
+                  className="form-input w-full file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-mainRed file:text-white hover:file:bg-mainRed/90 file:cursor-pointer"
+                />
+                {cvFile && (
+                  <p className="text-sm text-green-600 mt-1">
+                    ✓ {cvFile.name} ({(cvFile.size / 1024 / 1024).toFixed(2)} MB)
+                  </p>
+                )}
+                {cvError && (
+                  <p className="text-sm text-red-600 mt-1">
+                    {cvError}
+                  </p>
+                )}
               </div>
               <div>
                 <label className="block mb-1 font-medium">{t("career.applicationForm.message")}</label>
