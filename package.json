@@ -15,7 +15,6 @@
     "deploy": "npm run build:github && touch out/.nojekyll"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.16.0",
@@ -24,6 +23,7 @@
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "resend": "^6.0.2",
     "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {

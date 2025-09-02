@@ -9,7 +9,12 @@ async function subscribeToNewsletter(email: string, locale: 'en' | 'es' = 'en'):
     console.log('🔍 Newsletter API: Starting subscription for email:', email);
     
     if (!GOOGLE_APPS_SCRIPT_URL) {
-      console.log('❌ Newsletter API: Missing Google Apps Script URL');
+      console.log('❌ Newsletter API: Missing NEXT_PUBLIC_GOOGLE_APPS_SCRIPT_URL environment variable');
+      return false;
+    }
+    
+    if (!NEWSLETTER_SECRET_TOKEN) {
+      console.log('❌ Newsletter API: Missing NEWSLETTER_SECRET_TOKEN environment variable');
       return false;
     }
 

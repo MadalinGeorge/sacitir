@@ -1,24 +1,26 @@
 import { Job } from '@/types';
 
 // Google Sheets integration for client-side (GitHub Pages)
-const GOOGLE_SHEETS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY || 'AIzaSyDPeRywwHYahWTVTCxZ4Cla2EOb9IMrL1I';
-const GOOGLE_SHEETS_ID_EN = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_ID_EN || '18jO5rvmCGVNEQjr3pZdDvn4JD-0c4XgWtFFp5ZQxqOo';
-const GOOGLE_SHEETS_ID_ES = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_ID_ES || '1wBWFHBUTeEt4iyWpHeymLhgjaMM9OhWQxtCHOAohdro';
+const GOOGLE_SHEETS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY;
+const GOOGLE_SHEETS_ID_EN = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_ID_EN;
+const GOOGLE_SHEETS_ID_ES = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_ID_ES;
 const GOOGLE_SHEETS_RANGE = 'A:J';
 
 // Newsletter subscribers sheet
-const NEWSLETTER_SHEET_ID = process.env.NEXT_PUBLIC_SACITIR_NEWSLETTER_LIST || '1kzSLNI03DkvSuaHN6PH-sUO3tWtp_vlMi2iRdpQn7WE';
+const NEWSLETTER_SHEET_ID = process.env.NEXT_PUBLIC_SACITIR_NEWSLETTER_LIST;
 const NEWSLETTER_SHEET_RANGE = 'A:D';
 
 export async function fetchJobsFromGoogleSheetsClient(locale: 'en' | 'es' = 'en'): Promise<Job[]> {
   try {
     if (!GOOGLE_SHEETS_API_KEY) {
+      console.error('❌ Google Sheets: Missing GOOGLE_SHEETS_API_KEY environment variable');
       return [];
     }
 
     const sheetId = locale === 'es' ? GOOGLE_SHEETS_ID_ES : GOOGLE_SHEETS_ID_EN;
     
     if (!sheetId) {
+      console.error(`❌ Google Sheets: Missing ${locale === 'es' ? 'GOOGLE_SHEETS_ID_ES' : 'GOOGLE_SHEETS_ID_EN'} environment variable`);
       return [];
     }
 
@@ -65,7 +67,13 @@ export async function fetchJobsFromGoogleSheetsClient(locale: 'en' | 'es' = 'en'
 
 export async function subscribeToNewsletterClient(email: string, locale: 'en' | 'es' = 'en'): Promise<boolean> {
   try {
-    if (!GOOGLE_SHEETS_API_KEY || !NEWSLETTER_SHEET_ID) {
+    if (!GOOGLE_SHEETS_API_KEY) {
+      console.error('❌ Newsletter: Missing GOOGLE_SHEETS_API_KEY environment variable');
+      return false;
+    }
+    
+    if (!NEWSLETTER_SHEET_ID) {
+      console.error('❌ Newsletter: Missing SACITIR_NEWSLETTER_LIST environment variable');
       return false;
     }
 

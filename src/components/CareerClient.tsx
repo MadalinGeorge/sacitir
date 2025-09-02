@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useLocale } from "@/context/LocaleContext";
 import { Briefcase, MapPin, Clock, DollarSign, Users, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
-import { sendJobApplication, fetchJobsFromGoogleSheets } from "@/lib/utils";
+import { fetchJobsFromGoogleSheets } from "@/lib/utils";
 
 interface JobOffer {
   id: string;
@@ -34,6 +34,7 @@ export default function CareerClient() {
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [cvError, setCvError] = useState<string>("");
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [submitError, setSubmitError] = useState<string>("");
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -150,42 +151,73 @@ export default function CareerClient() {
 
   const handleSubmitApplication = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validate CV file
-    if (!cvFile) {
-      const error = t("career.applicationForm.cvRequired");
-      setCvError(Array.isArray(error) ? error[0] : error);
-      return;
-    }
-    
-    const cvValidationError = validateCvFile(cvFile);
-    if (cvValidationError) {
-      setCvError(cvValidationError);
-      return;
-    }
-    
-    setSubmitStatus("loading");
+    setSubmitStatus('loading');
+    setSubmitError('');
+
     try {
-      // Send job application with CV file
-      const success = await sendJobApplication({
-        ...applicationData,
-        cvFile: cvFile
+      // Validate CV file
+      if (!cvFile) {
+        const error = t('cvRequired');
+        setSubmitError(Array.isArray(error) ? error[0] : error);
+        setSubmitStatus('error');
+        return;
+      }
+
+      // Create form data for the API
+      const formData = {
+        name: applicationData.name,
+        email: applicationData.email,
+        phone: applicationData.phone,
+        position: applicationData.position,
+        message: applicationData.message,
+        cvFile: {
+          name: cvFile.name,
+          size: cvFile.size,
+          type: cvFile.type
+        }
+      };
+
+      const response = await fetch('/api/job-application', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-      
-      if (success) {
-        setSubmitStatus("success");
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitStatus('success');
+                          setApplicationData({
+            name: '',
+            email: '',
+            phone: '',
+            position: '',
+            message: ''
+          });
+        setCvFile(null);
+        setCvError('');
+        
         setTimeout(() => {
+          setSubmitStatus('idle');
           setShowApplicationForm(false);
-          setSubmitStatus("idle");
-          setApplicationData({ name: "", email: "", phone: "", position: "", message: "" });
-          setCvFile(null);
-          setCvError("");
-        }, 2000);
+        }, 3000);
       } else {
-        setSubmitStatus("error");
+        setSubmitStatus('error');
+        setSubmitError(result.error || 'Failed to submit application');
+        setTimeout(() => {
+          setSubmitStatus('idle');
+          setSubmitError('');
+        }, 3000);
       }
     } catch {
-      setSubmitStatus("error");
+      setSubmitStatus('error');
+      setSubmitError('Network error. Please try again.');
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setSubmitError('');
+      }, 3000);
     }
   };
 
@@ -445,7 +477,7 @@ export default function CareerClient() {
               )}
               {submitStatus === "error" && (
                 <div className="flex items-center text-red-600 mt-2">
-                  <span className="mr-2">!</span> {t("career.applicationForm.error")}
+                  <span className="mr-2">!</span> {submitError || t("career.applicationForm.error")}
                 </div>
               )}
             </form>

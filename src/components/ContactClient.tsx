@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useLocale } from '@/context/LocaleContext';
 import { Mail, Phone, MapPin, Clock, CheckCircle, AlertCircle } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 import { motion } from 'framer-motion';
 
 const getTranslation = (t: (key: string) => string | string[], key: string): string => {
@@ -13,7 +12,6 @@ const getTranslation = (t: (key: string) => string | string[], key: string): str
 
 export default function ContactClient() {
   const { t } = useLocale();
-  const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,26 +19,44 @@ export default function ContactClient() {
     message: ''
   });
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitStatus('loading');
+    setErrorMessage('');
+    
     try {
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'your_service_id';
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'your_template_id';
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'your_public_key';
-      if (formRef.current) {
-        await emailjs.sendForm(serviceId, templateId, formRef.current, publicKey);
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
         setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
         setTimeout(() => {
           setSubmitStatus('idle');
-          setFormData({ name: '', email: '', subject: '', message: '' });
+        }, 3000);
+      } else {
+        setSubmitStatus('error');
+        setErrorMessage(result.error || 'Failed to send message');
+        setTimeout(() => {
+          setSubmitStatus('idle');
+          setErrorMessage('');
         }, 3000);
       }
     } catch {
       setSubmitStatus('error');
+      setErrorMessage('Network error. Please try again.');
       setTimeout(() => {
         setSubmitStatus('idle');
+        setErrorMessage('');
       }, 3000);
     }
   };
@@ -157,7 +173,7 @@ export default function ContactClient() {
           >
             <div className="card">
               <h2 className="text-xl font-bold mb-6">{t('contact.form.title')}</h2>
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -244,7 +260,8 @@ export default function ContactClient() {
                 )}
                 {submitStatus === 'error' && (
                   <div className="flex items-center text-red-600 mt-2">
-                    <AlertCircle className="w-5 h-5 mr-2" /> {t('contact.form.error')}
+                    <AlertCircle className="w-5 h-5 mr-2" /> 
+                    {errorMessage || t('contact.form.error')}
                   </div>
                 )}
               </form>

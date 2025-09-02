@@ -1,54 +1,55 @@
 const fs = require('fs');
 const path = require('path');
 
-const deploymentTarget = process.env.DEPLOYMENT_TARGET;
+const DEPLOYMENT_TARGET = process.env.DEPLOYMENT_TARGET || 'vercel';
 
-// Setup jobs API route
-const jobsApiDir = path.join(__dirname, '../src/app/api/jobs');
-if (!fs.existsSync(jobsApiDir)) {
-  fs.mkdirSync(jobsApiDir, { recursive: true });
-}
+console.log(`🔧 Setting up API routes for: ${DEPLOYMENT_TARGET}`);
 
-// Setup newsletter API route
-const newsletterApiDir = path.join(__dirname, '../src/app/api/newsletter');
-if (!fs.existsSync(newsletterApiDir)) {
-  fs.mkdirSync(newsletterApiDir, { recursive: true });
-}
+// API routes to manage
+const apiRoutes = [
+  'jobs',
+  'newsletter',
+  'contact',
+  'job-application'
+];
 
-if (deploymentTarget === 'github-pages') {
-  // For GitHub Pages, remove the API routes entirely
-  const jobsRoutePath = path.join(jobsApiDir, 'route.ts');
-  const newsletterRoutePath = path.join(newsletterApiDir, 'route.ts');
+if (DEPLOYMENT_TARGET === 'github-pages') {
+  // Remove all API route files for static export
+  console.log('🗑️  Removing API routes for GitHub Pages (static export)');
   
-  if (fs.existsSync(jobsRoutePath)) {
-    fs.unlinkSync(jobsRoutePath);
-  }
-  if (fs.existsSync(newsletterRoutePath)) {
-    fs.unlinkSync(newsletterRoutePath);
-  }
+  apiRoutes.forEach(route => {
+    const routePath = path.join(__dirname, '..', 'src', 'app', 'api', route, 'route.ts');
+    if (fs.existsSync(routePath)) {
+      fs.unlinkSync(routePath);
+      console.log(`   ✅ Removed /api/${route}/route.ts`);
+    }
+  });
   
   console.log('✅ Removed API routes for GitHub Pages (static export)');
 } else {
-  // For Vercel, copy the working API routes
-  const jobsVercelRoutePath = path.join(__dirname, '../src/app/api/jobs/route.vercel.ts');
-  const jobsRoutePath = path.join(jobsApiDir, 'route.ts');
+  // Create API route files for Vercel/development
+  console.log('🔧 Creating API routes for Vercel/development');
   
-  const newsletterVercelRoutePath = path.join(__dirname, '../src/app/api/newsletter/route.vercel.ts');
-  const newsletterRoutePath = path.join(newsletterApiDir, 'route.ts');
+  apiRoutes.forEach(route => {
+    const routeDir = path.join(__dirname, '..', 'src', 'app', 'api', route);
+    const vercelRoutePath = path.join(routeDir, 'route.vercel.ts');
+    const routePath = path.join(routeDir, 'route.ts');
+    
+    // Create directory if it doesn't exist
+    if (!fs.existsSync(routeDir)) {
+      fs.mkdirSync(routeDir, { recursive: true });
+    }
+    
+    if (fs.existsSync(vercelRoutePath)) {
+      // Copy the Vercel template to route.ts
+      fs.copyFileSync(vercelRoutePath, routePath);
+      console.log(`   ✅ Created /api/${route}/route.ts`);
+    } else {
+      console.log(`   ⚠️  No template found for /api/${route}/route.vercel.ts`);
+    }
+  });
   
-  if (fs.existsSync(jobsVercelRoutePath)) {
-    fs.copyFileSync(jobsVercelRoutePath, jobsRoutePath);
-    console.log('✅ Created Vercel jobs API route (enabled)');
-  } else {
-    console.error('❌ Vercel jobs API route file not found');
-    process.exit(1);
-  }
-  
-  if (fs.existsSync(newsletterVercelRoutePath)) {
-    fs.copyFileSync(newsletterVercelRoutePath, newsletterRoutePath);
-    console.log('✅ Created Vercel newsletter API route (enabled)');
-  } else {
-    console.error('❌ Vercel newsletter API route file not found');
-    process.exit(1);
-  }
+  console.log('✅ Created Vercel API routes (enabled)');
 }
+
+console.log('🎯 API setup complete!');
