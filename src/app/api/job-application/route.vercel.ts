@@ -1,17 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { getApiTranslations } from '@/lib/apiTranslations';
 
 // Initialize Resend with API key
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, phone, position, message, cvFile } = await request.json();
+    const { name, email, phone, position, message, cvFile, locale = 'en' } = await request.json();
+    const t = getApiTranslations(locale as 'en' | 'es');
     
     // Validate required fields
     if (!name || !email || !phone || !position || !message) {
       return NextResponse.json(
-        { success: false, error: 'All fields are required' },
+        { success: false, error: t.api.errors.allFieldsRequired },
         { status: 400 }
       );
     }
@@ -20,7 +22,7 @@ export async function POST(request: NextRequest) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { success: false, error: 'Invalid email format' },
+        { success: false, error: t.api.errors.invalidEmail },
         { status: 400 }
       );
     }
@@ -29,15 +31,15 @@ export async function POST(request: NextRequest) {
     if (!process.env.RESEND_API_KEY) {
       console.error('❌ Job Application API: Missing RESEND_API_KEY environment variable');
       return NextResponse.json(
-        { success: false, error: 'Email service not configured' },
+        { success: false, error: t.api.errors.serviceNotConfigured },
         { status: 500 }
       );
     }
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'SACITIR <noreply@sacitir.com>', // Update with your verified domain
-      to: ['hr@sacitir.com'], // Update with your HR email
+      from: 'SACITIR <noreply@sacitir.com>',
+      to: ['hr@sacitir.com'],
       subject: `New Job Application: ${position}`,
       html: `
         <h2>New Job Application Received</h2>
@@ -58,7 +60,7 @@ export async function POST(request: NextRequest) {
     if (error) {
       console.error('❌ Job Application API: Resend error:', error);
       return NextResponse.json(
-        { success: false, error: 'Failed to send application' },
+        { success: false, error: t.api.errors.applicationFailed },
         { status: 500 }
       );
     }
@@ -66,7 +68,7 @@ export async function POST(request: NextRequest) {
     console.log('✅ Job Application API: Application sent successfully:', data);
     return NextResponse.json({ 
       success: true, 
-      message: 'Application submitted successfully',
+      message: t.api.success.applicationSubmitted,
       id: data?.id 
     });
 

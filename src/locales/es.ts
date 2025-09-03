@@ -299,6 +299,34 @@ const es = {
       alreadySubscribed: 'El correo ya está suscrito',
       invalidEmail: 'Por favor ingresa una dirección de correo válida'
     }
+  },
+  // Newsletter translations
+  subscribing: "Suscribiendo...",
+  success: "¡Éxito!",
+  successMessage: "¡Te has suscrito exitosamente a nuestro boletín!",
+  error: "Error",
+  errorMessage: "Algo salió mal. Por favor, inténtalo de nuevo.",
+  alreadySubscribed: "Este email ya está suscrito.",
+  invalidEmail: "Por favor, introduce un email válido.",
+
+  // API Error and Success Messages
+  api: {
+    errors: {
+      allFieldsRequired: "Todos los campos son obligatorios",
+      invalidEmail: "Formato de email inválido",
+      serviceNotConfigured: "Servicio de email no configurado",
+      sendFailed: "Error al enviar el email",
+      applicationFailed: "Error al enviar la solicitud",
+      networkError: "Error de red. Inténtalo de nuevo.",
+      internalError: "Error interno del servidor",
+      emailRequired: "El email es obligatorio",
+      missingToken: "Token de autenticación faltante"
+    },
+    success: {
+      messageSent: "Mensaje enviado correctamente",
+      applicationSubmitted: "Solicitud enviada correctamente",
+      subscribed: "Suscrito exitosamente al boletín"
+    }
   }
 };
 

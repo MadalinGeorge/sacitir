@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getApiTranslations } from '@/lib/apiTranslations';
 
 // Newsletter subscription using Google Apps Script webhook
 const GOOGLE_APPS_SCRIPT_URL = process.env.NEXT_PUBLIC_GOOGLE_APPS_SCRIPT_URL || '';
@@ -63,12 +64,14 @@ export async function POST(request: NextRequest) {
   try {
     console.log('🚀 Newsletter API: Received POST request');
     
-    const { email, locale } = await request.json();
+    const { email, locale = 'en' } = await request.json();
+    const t = getApiTranslations(locale as 'en' | 'es');
+    
     console.log('📧 Newsletter API: Request data:', { email, locale });
     
     if (!email) {
       console.log('❌ Newsletter API: Email is missing');
-      return NextResponse.json({ success: false, error: 'Email is required' }, { status: 400 });
+      return NextResponse.json({ success: false, error: t.api.errors.emailRequired }, { status: 400 });
     }
 
     const success = await subscribeToNewsletter(email, locale || 'en');
@@ -76,10 +79,10 @@ export async function POST(request: NextRequest) {
     
     if (success) {
       console.log('🎉 Newsletter API: Successfully subscribed');
-      return NextResponse.json({ success: true, message: 'Successfully subscribed to newsletter' });
+      return NextResponse.json({ success: true, message: t.api.success.subscribed });
     } else {
       console.log('❌ Newsletter API: Subscription failed');
-      return NextResponse.json({ success: false, error: 'Failed to subscribe or email already exists' }, { status: 400 });
+      return NextResponse.json({ success: false, error: t.api.errors.sendFailed }, { status: 400 });
     }
   } catch (error) {
     console.log('❌ Newsletter API: Exception in POST handler:', error);

@@ -11,7 +11,7 @@ const getTranslation = (t: (key: string) => string | string[], key: string): str
 };
 
 export default function ContactClient() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,7 +32,7 @@ export default function ContactClient() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, locale }),
       });
 
       const result = await response.json();
