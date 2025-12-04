@@ -41,6 +41,34 @@ const en = {
       title: 'Ready to Ship Your Cargo?',
       description: 'Get a free quote today and experience reliable freight transport with our Euro 6 latest generation trucks',
       button: 'Get Free Quote'
+    },
+    trust: {
+      title: 'Why Choose Us?',
+      description: 'Trust our experience and commitment to excellence',
+      stats: {
+        vehicles: 'Fleet Vehicles',
+        cities: 'Cities Covered',
+        deliveries: 'Deliveries Made',
+        satisfaction: 'Client Satisfaction'
+      },
+      features: {
+        euro6: 'Euro 6 Trucks',
+        gps: 'GPS Tracking',
+        insurance: 'Full Insurance',
+        support: '24/7 Support'
+      }
+    },
+    testimonials: {
+      title: 'What Our Clients Say',
+      1: {
+        text: 'Excellent transport service. Always on time and with very professional treatment. I totally recommend them.'
+      },
+      2: {
+        text: 'The refrigerated transport is impeccable. Our products always arrive in perfect condition.'
+      },
+      3: {
+        text: 'We have been working with SACITIR for years and they have never let us down. Great quality of service and customer care.'
+      }
     }
   },
   about: {
@@ -187,6 +215,7 @@ const en = {
     title: 'Contact Us',
     subtitle: 'Get in touch with our team',
     getInTouch: 'Get in Touch',
+    getInTouchDescription: 'Ready to ship your cargo? Contact our experienced team for personalized logistics solutions and competitive quotes.',
     sendMessage: 'Send us a Message',
     findUs: 'Find Us',
     form: {

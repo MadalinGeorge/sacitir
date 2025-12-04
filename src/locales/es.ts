@@ -41,6 +41,34 @@ const es = {
       title: '¿Listo para Enviar tu Carga?',
       description: 'Obtén una cotización gratuita hoy y experimenta un transporte de carga confiable con nuestros camiones de última generación Euro 6',
       button: 'Cotización Gratuita'
+    },
+    trust: {
+      title: '¿Por Qué Elegirnos?',
+      description: 'Confía en nuestra experiencia y compromiso con la excelencia',
+      stats: {
+        vehicles: 'Vehículos en Flota',
+        cities: 'Ciudades Cubiertas',
+        deliveries: 'Entregas Realizadas',
+        satisfaction: 'Satisfacción del Cliente'
+      },
+      features: {
+        euro6: 'Camiones Euro 6',
+        gps: 'Seguimiento GPS',
+        insurance: 'Seguro Completo',
+        support: 'Soporte 24/7'
+      }
+    },
+    testimonials: {
+      title: 'Lo Que Dicen Nuestros Clientes',
+      1: {
+        text: 'Excelente servicio de transporte. Siempre puntuales y con un trato muy profesional. Los recomiendo totalmente.'
+      },
+      2: {
+        text: 'El transporte frigorífico es impecable. Nuestros productos siempre llegan en perfectas condiciones.'
+      },
+      3: {
+        text: 'Llevamos años trabajando con SACITIR y nunca nos han fallado. Gran calidad de servicio y atención al cliente.'
+      }
     }
   },
   about: {
@@ -187,6 +215,7 @@ const es = {
     title: 'Contáctanos',
     subtitle: 'Ponte en contacto con nuestro equipo',
     getInTouch: 'Ponte en Contacto',
+    getInTouchDescription: '¿Listo para enviar tu carga? Contacta con nuestro equipo experimentado para soluciones logísticas personalizadas y presupuestos competitivos.',
     sendMessage: 'Envíanos un Mensaje',
     findUs: 'Encuéntranos',
     form: {

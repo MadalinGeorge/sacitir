@@ -1,0 +1,18 @@
+# Robots.txt for SACITIR
+# https://sacitir.es / https://sacitir.com
+
+User-agent: *
+Allow: /
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Sitemap locations
+Sitemap: https://sacitir.es/sitemap.xml
+Sitemap: https://sacitir.com/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
+

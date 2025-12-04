@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 import { getImagePath } from '@/lib/utils';
 
 export default function About() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const [counters, setCounters] = React.useState<{
     fleet: number;
     cities: number;
@@ -329,7 +329,7 @@ export default function About() {
               whileTap={{ scale: 0.95 }}
             >
               <Link
-                href="/contact"
+                href={`/${locale}/contact`}
                 className="btn-secondary inline-flex items-center justify-center"
               >
                 {t('about.cta.button')}
@@ -340,7 +340,7 @@ export default function About() {
               whileTap={{ scale: 0.95 }}
             >
               <Link
-                href="/services"
+                href={`/${locale}/services`}
                 className="btn-secondary inline-flex items-center justify-center"
               >
                 {t('about.cta.learnMore')}

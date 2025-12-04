@@ -57,11 +57,11 @@ const Footer = () => {
   };
 
   const navLinks = [
-    { key: 'nav.home', href: '/' },
-    { key: 'nav.about', href: '/about' },
-    { key: 'nav.services', href: '/services' },
-    { key: 'nav.career', href: '/career' },
-    { key: 'nav.contact', href: '/contact' },
+    { key: 'nav.home', href: `/${locale}` },
+    { key: 'nav.about', href: `/${locale}/about` },
+    { key: 'nav.services', href: `/${locale}/services` },
+    { key: 'nav.career', href: `/${locale}/career` },
+    { key: 'nav.contact', href: `/${locale}/contact` },
   ];
 
   const services = [
@@ -139,7 +139,7 @@ const Footer = () => {
               {services.map((service) => (
                 <li key={service}>
                   <Link 
-                    href="/services"
+                    href={`/${locale}/services`}
                     className="text-textWhite/80 hover:text-mainRed transition-colors"
                   >
                     {t(service)}

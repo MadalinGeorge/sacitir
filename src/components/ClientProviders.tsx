@@ -5,6 +5,8 @@ import { LocaleProvider } from '@/context/LocaleContext';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import CookieConsent from '@/components/CookieConsent';
+import StructuredData from '@/components/StructuredData';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 interface ClientProvidersProps {
   children: React.ReactNode;
@@ -13,6 +15,8 @@ interface ClientProvidersProps {
 export default function ClientProviders({ children }: ClientProvidersProps) {
   return (
     <LocaleProvider>
+      <StructuredData type="organization" />
+      <StructuredData type="localBusiness" />
       <div className="min-h-screen bg-white text-gray-900">
         <Navigation />
         <main className="pt-16 lg:pt-20">
@@ -20,6 +24,7 @@ export default function ClientProviders({ children }: ClientProvidersProps) {
         </main>
         <Footer />
         <CookieConsent />
+        <WhatsAppButton />
       </div>
     </LocaleProvider>
   );

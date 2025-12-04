@@ -41,7 +41,7 @@ function ServiceCard({ icon: Icon, title, description, delay = 0 }: ServiceCardP
 }
 
 export default function HomeClient() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
 
   return (
     <div className="bg-white">
@@ -93,7 +93,7 @@ export default function HomeClient() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Link
-                  href="/contact"
+                  href={`/${locale}/contact`}
                   className="btn-primary inline-flex"
                 >
                   {t('home.hero.cta')}
@@ -105,7 +105,7 @@ export default function HomeClient() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Link
-                  href="/about"
+                  href={`/${locale}/about`}
                   className="btn-primary inline-flex"
                 >
                   {t('home.hero.learnMore')}
@@ -200,7 +200,7 @@ export default function HomeClient() {
               {t('home.services.title')}
             </h2>
             <Link
-              href="/services"
+              href={`/${locale}/services`}
               className="text-mainRed font-medium inline-flex items-center relative group"
             >
               {t('home.services.viewAll')}
@@ -237,6 +237,135 @@ export default function HomeClient() {
         </div>
       </section>
 
+      {/* Trust Elements - Stats & Certifications */}
+      <section className="py-16 bg-white">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl lg:text-4xl font-bold text-secondaryBlack mb-4">
+              {t('home.trust.title')}
+            </h2>
+            <p className="text-lg text-secondaryBlack/70 max-w-2xl mx-auto">
+              {t('home.trust.description')}
+            </p>
+          </motion.div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            {[
+              { number: '20+', label: t('home.trust.stats.vehicles') },
+              { number: '50+', label: t('home.trust.stats.cities') },
+              { number: '500+', label: t('home.trust.stats.deliveries') },
+              { number: '98%', label: t('home.trust.stats.satisfaction') },
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="text-center p-6 rounded-2xl bg-secondaryPlatinium/50 border border-gray-100"
+              >
+                <div className="text-3xl md:text-4xl font-bold text-mainRed mb-2">{stat.number}</div>
+                <div className="text-sm text-secondaryBlack/70">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Certifications/Features */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { icon: '🚚', text: t('home.trust.features.euro6') },
+              { icon: '📍', text: t('home.trust.features.gps') },
+              { icon: '🛡️', text: t('home.trust.features.insurance') },
+              { icon: '⏰', text: t('home.trust.features.support') },
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
+              >
+                <span className="text-2xl">{feature.icon}</span>
+                <span className="text-sm font-medium text-secondaryBlack">{feature.text}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-16 bg-secondaryPlatinium">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl lg:text-4xl font-bold text-secondaryBlack mb-4">
+              {t('home.testimonials.title')}
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                name: 'María García',
+                company: 'Distribuciones García S.L.',
+                text: t('home.testimonials.1.text'),
+                rating: 5
+              },
+              {
+                name: 'Carlos Rodríguez',
+                company: 'Fresh Foods Export',
+                text: t('home.testimonials.2.text'),
+                rating: 5
+              },
+              {
+                name: 'Ana Martínez',
+                company: 'Logística Norte',
+                text: t('home.testimonials.3.text'),
+                rating: 5
+              }
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100"
+              >
+                <div className="flex gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <span key={i} className="text-yellow-400">★</span>
+                  ))}
+                </div>
+                <p className="text-secondaryBlack/80 mb-4 italic">&quot;{testimonial.text}&quot;</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-mainRed/10 rounded-full flex items-center justify-center">
+                    <span className="text-mainRed font-bold">{testimonial.name[0]}</span>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-secondaryBlack">{testimonial.name}</p>
+                    <p className="text-sm text-secondaryBlack/60">{testimonial.company}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-mainRed">
         <motion.div 
@@ -257,7 +386,7 @@ export default function HomeClient() {
             whileTap={{ scale: 0.95 }}
           >
             <Link
-              href="/contact"
+              href={`/${locale}/contact`}
               className="btn-secondary inline-flex items-center"
             >
               {t('home.cta.button')}

@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import { getImagePath } from '@/lib/utils';
 
 export default function ServicesClient() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
 
   const getTranslation = (key: string): string => {
     const translation = t(key);
@@ -117,7 +117,7 @@ export default function ServicesClient() {
                       whileTap={{ scale: 0.95 }}
                     >
                       <Link
-                        href="/contact"
+                        href={`/${locale}/contact`}
                         className="btn-primary-white-bg inline-flex items-center"
                       >
                         {t('services.learnMore')}
@@ -169,7 +169,7 @@ export default function ServicesClient() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Link
-                  href="/contact"
+                  href={`/${locale}/contact`}
                   className="btn-secondary inline-flex items-center justify-center"
                 >
                   {t('services.cta.button')}
@@ -181,7 +181,7 @@ export default function ServicesClient() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Link
-                  href="/about"
+                  href={`/${locale}/about`}
                   className="btn-secondary inline-flex items-center justify-center"
                 >
                   {t('services.cta.learnMore')}

@@ -380,8 +380,8 @@ export default function CareerClient() {
 
       {/* Application Form Modal */}
       {showApplicationForm && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full relative">
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-start justify-center overflow-y-auto py-10 px-4">
+          <div className="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full relative mt-10 mb-10">
             <button
               className="absolute top-2 right-2 text-secondaryBlack hover:text-mainRed"
               onClick={() => {
